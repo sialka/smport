@@ -1,0 +1,19 @@
+.login-error{    
+    background-color: rgb(220,53,69, 0.2);
+    color: #AB0909;
+    border-radius: 20px;
+    border: 1px solid #AB0909;
+    font-size: 0.8rem;
+    padding: 4px 8px;    
+    text-align: center;
+    margin-bottom: 1em;
+}
+.form-control-user{
+    padding: 1rem 1rem !important;
+}
+
+.btn-login{
+    font-size: .8rem !important;
+    border-radius: 10rem !important;
+    padding: 0.5rem 1rem !important;
+}

@@ -1,0 +1,267 @@
+/*! added.css v1.0.0 | MIT License | by sialka */
+
+.no-border {
+    border: 0px;
+}
+
+.no-radius {
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+}
+
+
+.no-link {
+    color: #08c !important;
+}
+
+.no-link:hover {
+    color: #08c !important;
+    text-decoration: none;
+}
+
+.border-tab {
+    border-left: 1px solid #dddfeb;
+    border-right: 1px solid #dddfeb;
+    border-bottom: 1px solid #dddfeb;
+}
+
+.normal {
+    /*text-shadow: 0 -1px 0 rgba(0,0,0,0.25)!important;
+  font-size: 85%;*/
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.text-padrao {
+    font-size: 1em;
+}
+
+.disabled {
+    background-color: #EEEEEE;
+}
+
+.display-none {
+    display: none;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+    outline: 0;
+    /*border-radius: 0px;*/
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+
+}
+
+.dashboard-title {
+    font-size: 24px;
+    text-rendering: optimizelegibility;
+    font-weight: lighter;
+    color: #478fca;
+    font-weight: 300;
+    padding-bottom: 5px;
+    margin: 0px 15px;
+    border-bottom: 1px dotted #e4e6e9;
+}
+
+.bg-footer {
+    background-color: #eff3f8;
+}
+
+a {
+    color: #005580;
+}
+
+a:hover {
+    color: #005580;
+}
+
+.border-r-0 {
+    border-right: 0px !important;
+
+}
+
+.border-l-0 {
+    border-left: 0px !important;
+}
+
+.border-t-1 {
+    border-top: 1px solid #d6d6d6 !important;
+}
+
+.border-b-1 {
+    border-bottom: 1px solid #d6d6d6 !important;
+}
+
+.border-r-1 {
+    border-right: 1px solid #d6d6d6 !important;
+}
+
+.border-l-1 {
+    border-left: 1px solid #d6d6d6 !important;
+}
+
+
+.externa {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 100vh;
+}
+
+
+.login-error {
+    background-color: transparent !important;
+    color: #cc0000 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    font-weight: bold;
+}
+
+.border-1 {
+    border: 1px solid #d6d6d6;
+}
+
+
+.label-disabled {
+    background-color: #eaecf4;
+}
+
+
+.file {}
+
+input[type="file"] {
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    padding: 2px;
+    height: calc(1.5em + 0.75rem) !important;
+    font-size: 13px;
+}
+
+.mes-padrao-scrollbar {
+    height: 350px !important;
+    overflow-y: scroll !important;
+}
+
+.mes-padrao-scrollbar::-webkit-scrollbar {
+    width: 10px !important;
+}
+
+.mes-padrao-scrollbar::-webkit-scrollbar-track {
+    background: white;
+    /* color of the tracking area */
+}
+
+.mes-padrao-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #3C63D2;
+    /* color of the scroll thumb */
+    border-radius: 10px;
+    /* roundness of the scroll thumb */
+    border: 2px solid #9CC2FA;
+    /* creates padding around scroll thumb */
+}
+
+/* PAINEL */
+
+.painel {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.senha {
+    font-size: 6rem;
+    text-align: center;
+}
+
+.localidade {
+    font-size: 6rem;
+    text-align: center;
+    font-weight: 800;
+}
+
+.center {
+    text-align: center;
+}
+
+.bg-black {
+    background: #000000;
+}
+
+/**/
+
+.call-senha {
+    font-size: 18rem;
+    text-align: center;
+    font-weight: 800;
+    color: black;
+}
+
+.call-senha-localidade {
+    font-size: 12rem;
+    text-align: center;
+    font-weight: 800;
+    color: black;
+}
+
+.titulo {
+    font-size: 7rem;
+    text-align: center;
+    font-weight: 800;
+    color: black;
+}
+
+.center {
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+.text-normal {
+    font-size: 1rem;
+}
+
+.dash-card{
+    font-size: 1.4rem;
+}
+
+.dash-value{
+    font-size: 2rem;
+}
+
+.msg-mobile{
+    display: none;
+}
+
+.mobile-msg-panel {
+    display: none;      
+}
+
+.dash-card-h1 {
+    font-size: 2rem;
+}
+
+.dash-card-h2 {
+    font-size: 1.5rem;
+}
+
+.dash-card-h3 {
+    font-size: 1.4rem;
+}
+
+.dash-card-h4 {
+    font-size: 1.2rem;
+}
+
+

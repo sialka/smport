@@ -193,37 +193,11 @@ class DashboardController extends AppController
     private function ensaio($municipio_id, $horarios)
     {
 
+        $schema = $this->semana_atual()['schema'];
+        $semana = $this->semana_atual()['semana'];
+
         $utils = $this->utils();
         $ensaio = [];
-        $ano = Time::now()->format('Y');
-        $mes = Time::now()->format('m');
-        $mes_3031 = cal_days_in_month(CAL_GREGORIAN, $mes, $ano); // 31
-
-        $schema = [
-            1 => [],
-            2 => [],
-            3 => [],
-            4 => [],
-            5 => [],
-            6 => [],
-        ];
-
-        $semana = 1;
-
-        for ($i = 1; $i <= $mes_3031; $i++) {
-
-            $now = Time::parse("{$ano}-{$mes}-{$i}");
-            $detalhes = getdate(strtotime($now->format('d-m-Y')));
-            $dia_semana = $detalhes['weekday'];
-
-            if ($dia_semana == "Saturday") {
-                array_push($schema[$semana], $i);
-                $semana++;
-            } else {
-                array_push($schema[$semana], $i);
-            }
-        }
-
         $semana_atual = null;
         $hoje = Time::now()->format('d');
 
@@ -269,6 +243,42 @@ class DashboardController extends AppController
 
         }
 
+        $this->set('semana_atual', $semana_atual);
         return $ensaio;
+    }
+
+    private function semana_atual(){
+
+        $ano = Time::now()->format('Y');
+        $mes = Time::now()->format('m');
+        $mes_3031 = cal_days_in_month(CAL_GREGORIAN, $mes, $ano); // 31
+
+        $schema = [
+            1 => [],
+            2 => [],
+            3 => [],
+            4 => [],
+            5 => [],
+            6 => [],
+        ];
+
+        $semana = 1;
+
+        for ($i = 1; $i <= $mes_3031; $i++) {
+
+            $now = Time::parse("{$ano}-{$mes}-{$i}");
+            $detalhes = getdate(strtotime($now->format('d-m-Y')));
+            $dia_semana = $detalhes['weekday'];
+
+            if ($dia_semana == "Saturday") {
+                array_push($schema[$semana], $i);
+                $semana++;
+            } else {
+                array_push($schema[$semana], $i);
+            }
+        }
+
+        $this->set('schema', $schema);
+        return ['semana'=>$semana, 'schema'=>$schema];
     }
 }

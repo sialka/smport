@@ -1,6 +1,16 @@
 <?php
+
   $data_week = getdate();
-  $teste = [18,19,20,21,22,23,24];
+
+  $dias_da_semana = $schema[$semana_atual];
+
+  if (count($dias_da_semana) < 5){
+    $dias = 7-count($dias_da_semana);
+    for ($i = 1; $i <= $dias; $i++) {
+      array_push($dias_da_semana, $i);
+    }
+  }
+
 ?>
 <style>
   .list-group-choice-municipios{
@@ -35,7 +45,7 @@
           <li class='list-group-item no-radius text-center text-dark' style="background-color: #fafafa; -width: 50%; -margin-left: 10rem">
             <a class="btn btn-block no-radius p-0 m-0 text-center <?= $class; ?>"
               data-toggle="collapse" href="#<?= $dia ?>" role="button" aria-expanded="false" aria-controls="<?= $dia ?>">
-              <strong><?= "{$teste[$key]} - {$dia}" ?></strong>
+              <strong><?= "{$dias_da_semana[$key]} - {$dia}" ?></strong>
             </a>
           </li>
 

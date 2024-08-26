@@ -39,7 +39,8 @@ return [
     'App' => [
         'namespace' => 'App',
         'encoding' => env('APP_ENCODING', 'UTF-8'),
-        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
+        //'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
+        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'pt_BR'),
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -224,14 +225,14 @@ return [
             //'driver' => 'Cake\Database\Driver\Postgres',
             'persistent' => false,
 
-            # Develop            
+            # Develop
             'host' => '127.0.0.1',
             'username' => 'root',
             'password' => '123456',
             'database' => 'smport',
 
-            # Producao            
-            #'host' => 'smport.mysql.dbaas.com.br',                        
+            # Producao
+            #'host' => 'smport.mysql.dbaas.com.br',
             #'username' => 'smport',
             #'password' => 'Suporte#787923',
             #'database' => 'smport',
@@ -246,8 +247,8 @@ return [
             'timezone' => 'UTC',
             'flags' => [],
             'cacheMetadata' => true,
-            'log' => false,                        
-            
+            'log' => false,
+
             /**
              * Set identifier quoting to true if you are using reserved words or
              * special characters in your table or column names. Enabling this

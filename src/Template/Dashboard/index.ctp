@@ -138,7 +138,7 @@
 
       <div class="collapse" id="batismo">
 
-        <?php if(count($regional) == 0){ ?>
+        <?php if(count($batismo) == 0){ ?>
 
           <p class='text-center'>Nenhum Batismo cadastrado para esse Município.</p>
 

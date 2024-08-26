@@ -130,7 +130,7 @@ class DashboardController extends AppController
         foreach ($query as $info) {
 
             $data = $info->data->format('d/m/Y');
-            $hora = $info->horario_id;
+            # $hora = $info->horario_id;
 
             $dia_br = $utils['semana_id_longo'][$info->dia_semana];
 

@@ -21,7 +21,7 @@ class BatismoController extends AppController {
     public function initialize() {
         parent::initialize();
 
-        $this->request->session()->write('layout', 'admin');  
+        $this->request->session()->write('layout', 'admin');
         $this->loadComponent('Paginator');
         $this->loadComponent('Conditions', [
             'prefixSession'      => 'ccb',
@@ -63,9 +63,9 @@ class BatismoController extends AppController {
 
         $conversion = array(
             'Batismo' => array(
-                'id'        => array('name' => 'id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('ID'), 'ignore' => array('')),                
-                'nome'      => array('name' => 'Localidades.nome', 'operation' => 'LIKE', 'coalesce' => false, 'date' => false, 'alias' => __('Localidade'), 'ignore' => array('')),                                
-                'municipio' => array('name' => 'Localidades.municipio_id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('Municipio'), 'ignore' => array('')),                                
+                'id'        => array('name' => 'id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('ID'), 'ignore' => array('')),
+                'nome'      => array('name' => 'Localidades.nome', 'operation' => 'LIKE', 'coalesce' => false, 'date' => false, 'alias' => __('Localidade'), 'ignore' => array('')),
+                'municipio' => array('name' => 'Localidades.municipio_id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('Municipio'), 'ignore' => array('')),
                 '_all'      => array('name' => ['Localidades.id', 'Localidades.nome'], 'operations' => ['LIKE', 'LIKE'], 'coalesce' => false, 'date' => false, 'alias' => __('Pesquisa'), 'ignore' => array(''))
             )
         );
@@ -75,9 +75,9 @@ class BatismoController extends AppController {
         }
 
         $_conditions = $this->Conditions->filter('Batismo', $conversion, [], null, null);
-        //$_conditions['conditions'] += ['Localidades.setor' => 4];        
-        
-        $batismo = $this->paginate($this->Batismo->find('all')->contain(['Localidades.Municipios'])->where($_conditions['conditions']));        
+        //$_conditions['conditions'] += ['Localidades.setor' => 4];
+
+        $batismo = $this->paginate($this->Batismo->find('all')->contain(['Localidades.Municipios'])->where($_conditions['conditions']));
 
         //debug($batismo);exit;
 
@@ -97,22 +97,22 @@ class BatismoController extends AppController {
             $new = $this->Batismo->patchEntity($batismo, $data);
 
             $dataUS = $this->converte_date($data['data']);
-            
+
             $new->data = $dataUS;
             $new->dia_semana = $this->converte_semana_dia($dataUS);
-            
-            if ($this->Batismo->save($new)) {                
-                
+
+            if ($this->Batismo->save($new)) {
+
                 $this->Flash->success(__('O Batismo foi adicionado com sucesso !!!'));
-                
+
                 return $this->redirect(['controller' => 'Batismo', 'action' => 'index']);
-                
+
             } else {
 
                 $error_list = "<p class='mt-2'>Não foi possivel adicionar o Batismo !</p>";
                 $error_list .= '<ul class="mt-3">';
                 $erros = $new->errors();
-                                
+
                 if($erros){
                     foreach($erros as $key => $value){
                         $error_list .= "<li>".implode(' ', $value) . "</li>";
@@ -120,11 +120,11 @@ class BatismoController extends AppController {
                 }
                 $error_list .= '</ul>';
                 $this->Flash->error($error_list);
-                
+
                 return $this->redirect(['controller' => 'Batismo', 'action' => 'add']);
             }
-        }      
-        
+        }
+
 
         $this->aevOptions();
         $this->set('batismo', $batismo);
@@ -137,13 +137,13 @@ class BatismoController extends AppController {
 
         if ($this->request->is('post')) {
 
-            $data = $this->request->data;            
+            $data = $this->request->data;
 
             $dataUS = $this->converte_date($data['data']);
-            
-            $new = $this->Batismo->patchEntity($batismo, $data);            
 
-            $new->data = $dataUS;       
+            $new = $this->Batismo->patchEntity($batismo, $data);
+
+            $new->data = $dataUS;
             $new->dia_semana = $this->converte_semana_dia($dataUS);
 
             if ($this->Batismo->save($new)) {
@@ -175,7 +175,7 @@ class BatismoController extends AppController {
     }
 
     public function delete($id = null){
-        
+
         $batismo = $this->Batismo->get($id);
 
         if($batismo){
@@ -192,22 +192,22 @@ class BatismoController extends AppController {
         return $this->redirect(['controller' => 'Batismo', 'action' => 'index']);
     }
 
-    public function aevOptions() {               
+    public function aevOptions() {
 
         $aevOptions = $this->Batismo->aevOptions();
 
-        $this->set('aevOptions', $aevOptions);        
+        $this->set('aevOptions', $aevOptions);
     }
 
     private function converte_date($data){
 
-        $dateBR = $data;            
+        $dateBR = $data;
         $dia = substr($dateBR,0,2);
         $mes  = substr($dateBR,3,2);
         $ano  = substr($dateBR,6,4);
         $dataFmt = "{$ano}-{$mes}-{$dia}";
-        $dataUS = new Date($dataFmt);        
-        
+        $dataUS = new Date($dataFmt);
+
         return $dataUS;
     }
 
@@ -215,8 +215,8 @@ class BatismoController extends AppController {
 
         $utils = $this->utils();
         $detalhes = getdate(strtotime($dataUS));
-        $dia_us = $detalhes['weekday'];                    
-        $dia_semana = $utils['semana_dia_us'][$dia_us]; 
+        $dia_us = $detalhes['weekday'];
+        $dia_semana = $utils['semana_dia_us'][$dia_us];
 
         return $dia_semana;
     }

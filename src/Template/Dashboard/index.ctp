@@ -159,7 +159,62 @@
           ?>
           </ul>
 
+        <?php } ?>
 
+      </div>
+
+      <!-- REUNIÕES -->
+      <h4 class="text-center mt-3 bg bb"
+        data-toggle="collapse" href="#reunioes" role="button" aria-expanded="false" aria-controls="batismo">
+        REUNIÕES
+      </h4>
+
+      <div class="collapse" id="reunioes">
+        <?php if(count($reunioes) == 0){ ?>
+          <p class='text-center'>Nenhum Reunião cadastrada.</p>
+        <?php }else{ ?>
+          <ul class="list-group no-radius mb-5">
+          <?php
+          foreach($reunioes as $datas => $locais){
+            echo "<li class='list-group-item no-radius active'>Data: <strong>{$datas}</strong></li>";
+            foreach($locais as $local){
+              $info = explode('-', $local);
+              $hora = $info[0];
+              $cidade = $info[1];
+              $localidade = $info[2];
+              echo "<li class='list-group-item no-radius text-center text-dark'><strong>{$localidade}</strong><br><small>{$hora} - {$cidade}</small></li>";
+            }
+          }
+          ?>
+          </ul>
+        <?php } ?>
+      </div>
+
+      <!--ORDENAÇÕES -->
+      <h4 class="text-center mt-3 bg bb"
+        data-toggle="collapse" href="#ordenacoes" role="button" aria-expanded="false" aria-controls="batismo">
+        ORDENAÇÕES
+      </h4>
+
+      <div class="collapse" id="ordenacoes">
+
+        <?php if(count($ordenacoes) == 0){ ?>
+          <p class='text-center'>Nenhuma Ordenação cadastrada.</p>
+        <?php }else{ ?>
+          <ul class="list-group no-radius mb-5">
+          <?php
+          foreach($ordenacoes as $datas => $locais){
+            echo "<li class='list-group-item no-radius active'>Data: <strong>{$datas}</strong></li>";
+            foreach($locais as $local){
+              $info = explode('-', $local);
+              $hora = $info[0];
+              $cidade = $info[1];
+              $localidade = $info[2];
+              echo "<li class='list-group-item no-radius text-center text-dark'><strong>{$localidade}</strong><br><small>{$hora} - {$cidade}</small></li>";
+            }
+          }
+          ?>
+          </ul>
         <?php } ?>
 
       </div>

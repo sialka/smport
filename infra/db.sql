@@ -86,6 +86,31 @@ CREATE TABLE IF NOT EXISTS `municipios` (
 
 ALTER TABLE `municipios` ADD `favorito` char(1) DEFAULT '0';
 
+
+DROP TABLE `reuniao`
+CREATE TABLE IF NOT EXISTS `reuniao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `localidade_id` INT NOT NULL,
+  `data` date NOT NULL,
+  `dia_semana` CHAR(1) NOT NULL DEFAULT '1',
+  `horario_id` INT NOT NULL,
+  `created` timestamp NULL DEFAULT NULL,
+  `modified` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+DROP TABLE `ordenacao`
+CREATE TABLE IF NOT EXISTS `ordenacao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `localidade_id` INT NOT NULL,
+  `dia_semana` CHAR(1) NOT NULL DEFAULT '1',
+  `data` date NOT NULL,
+  `horario_id` INT NOT NULL,
+  `created` timestamp NULL DEFAULT NULL,
+  `modified` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
 -- --------------------------------------------------------
 --
 -- Estrutura da tabela `users`

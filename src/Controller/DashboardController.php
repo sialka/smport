@@ -64,6 +64,12 @@ class DashboardController extends AppController
         $semana     = $utils['semana_longo'];
         $semana_us_br = $utils['semana_us_longo'];
 
+        # --- Reunião --- #
+        $reunioes = $this->reuniao($municipio_id, $horarios);
+
+        # --- Ordenação --- #
+        $ordenacoes = $this->ordenacao($municipio_id, $horarios);
+
         $this->set('municipios', $municipios);
         $this->set('btn_local_title', $btn_local_title);
         $this->set('semana', $semana);
@@ -73,6 +79,8 @@ class DashboardController extends AppController
         $this->set('batismo', $batismo);
         $this->set('regional', $regional);
         $this->set('horarios', $horarios);
+        $this->set('reunioes', $reunioes);
+        $this->set('ordenacoes', $ordenacoes);
     }
 
     private function load_data($tipo, $semana, $horarios)
@@ -152,6 +160,81 @@ class DashboardController extends AppController
         return $batismo;
     }
 
+    private function ordenacao($municipio_id, $horarios)
+    {
+
+        $utils = $this->utils();
+        $ordenacao = [];
+        $hoje = Time::now()->format('Y-m-d');
+        $condicao = [
+            'data >=' => $hoje,
+            'Localidades.municipio_id' => $municipio_id,
+        ];
+        $ordenacaoTable = TableRegistry::get('Ordenacao');
+        $query = $ordenacaoTable->find()->contain(['Localidades.Municipios', 'Horarios'])->where($condicao)->order(['data' => 'asc', 'Horarios.hora' => 'asc'])->toArray();
+
+        foreach ($query as $info) {
+
+            $data = $info->data->format('d/m/Y');
+            # $hora = $info->horario_id;
+
+            $dia_br = $utils['semana_id_longo'][$info->dia_semana];
+
+            $ordenacao += ["{$data} - {$dia_br}" => []];
+        }
+
+        foreach ($query as $info) {
+            $igreja = $info->Localidades->nome;
+            $cidade = $info->Localidades->Municipios->nome;
+            $data = $info->data->format('d/m/Y');
+            $hora = $info->horario_id;
+
+            # Dia da Semana
+            $dia_br = $utils['semana_id_longo'][$info->dia_semana];
+
+            array_push($ordenacao["{$data} - {$dia_br}"], "{$horarios[$hora]} - {$cidade} - {$igreja}");
+        }
+
+        return $ordenacao;
+    }
+
+    private function reuniao($municipio_id, $horarios)
+    {
+
+        $utils = $this->utils();
+        $reuniao = [];
+        $hoje = Time::now()->format('Y-m-d');
+        $condicao = [
+            'data >=' => $hoje,
+            'Localidades.municipio_id' => $municipio_id,
+        ];
+        $reuniaoTable = TableRegistry::get('Reuniao');
+        $query = $reuniaoTable->find()->contain(['Localidades.Municipios', 'Horarios'])->where($condicao)->order(['data' => 'asc', 'Horarios.hora' => 'asc'])->toArray();
+
+        foreach ($query as $info) {
+
+            $data = $info->data->format('d/m/Y');
+
+            $dia_br = $utils['semana_id_longo'][$info->dia_semana];
+
+            $reuniao += ["{$data} - {$dia_br}" => []];
+        }
+
+        foreach ($query as $info) {
+            $igreja = $info->Localidades->nome;
+            $cidade = $info->Localidades->Municipios->nome;
+            $data = $info->data->format('d/m/Y');
+            $hora = $info->horario_id;
+
+            # Dia da Semana
+            $dia_br = $utils['semana_id_longo'][$info->dia_semana];
+
+            array_push($reuniao["{$data} - {$dia_br}"], "{$horarios[$hora]} - {$cidade} - {$igreja}");
+        }
+
+        return $reuniao;
+    }
+
     private function regional($municipio_id, $horarios)
     {
 
@@ -208,7 +291,7 @@ class DashboardController extends AppController
         }
 
         $qtd_sab = $semana-1;
-        $sab_cond = $qtd_sab == 4 ? ">=" : "";
+        $sab_cond = ($semana_atual == 4 && $qtd_sab == 4) ? ">=" : "";
         $condicao = [
             "semana {$sab_cond}" => $semana_atual,
             "Localidades.municipio_id" => $municipio_id,
@@ -216,7 +299,6 @@ class DashboardController extends AppController
 
         $ensaioTable = TableRegistry::get('Ensaio');
         $query = $ensaioTable->find()->contain(['Localidades.Municipios', 'Horarios'])->where($condicao)->order(['dia_semana' => 'asc', 'Horarios.hora' => 'asc'])->toArray();
-
 
         // Gerar o schema: Dia_Mes Dia_Semana - Hora
         foreach ($query as $local) {

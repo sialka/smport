@@ -16,7 +16,7 @@
 $cakeDescription = 'CCB';
 //$usuario         = $this->request->session()->read('logado');
 //$perfil          = $this->request->session()->read('perfil');
-//$controller      = $this->request->params['controller'];    
+//$controller      = $this->request->params['controller'];
 //$body            = $controller == "Panels" ? "" : "page-top";
 //$wrapper         = $controller == "Panels" ? "" : "wrapper";
 //$overflow        = $controller == "Panels" ? "overflow: hidden" : "";
@@ -26,7 +26,7 @@ $cakeDescription = 'CCB';
 <!DOCTYPE html>
 <html>
 <head>
-    <?= $this->Html->charset() ?>    
+    <?= $this->Html->charset() ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -35,10 +35,10 @@ $cakeDescription = 'CCB';
         <?= $cakeDescription ?>
     </title>
 
-    <?= $this->Html->meta('icon') ?>    
-    
-    <!-- Bootstrap CSS -->    
-    <?= $this->Html->css('sb-admin-2.css') ?>   
+    <?= $this->Html->meta('icon') ?>
+
+    <!-- Bootstrap CSS -->
+    <?= $this->Html->css('sb-admin-2.css') ?>
     <?= $this->Html->css('sb-add.css') ?>
 
     <?= $this->Html->script('vendor/jquery/jquery.min.js') ?>
@@ -51,7 +51,7 @@ $cakeDescription = 'CCB';
       }
       .bb {
         border: 1px solid lightgray;
-        border-bottom: 1.5px solid gray;        
+        border-bottom: 1.5px solid gray;
         font-size: 2rem;
       }
 

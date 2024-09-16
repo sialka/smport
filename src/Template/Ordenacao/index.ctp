@@ -53,20 +53,18 @@
                                         <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.Localidades.Municipio.id', __('Municipio') ] ]); ?>
                                         <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.data', __('Data') ] ]); ?>
                                         <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.hora', __('Hora') ] ]); ?>
-                                        <th class="text-right" width="30%"></th>
-                                        <th class="text-right" width="10%"></th>
+                                        <th class="text-right" width="40%"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdMiddleAlign">
                                     <?php foreach ($ordenacao as $local): ?>
                                         <tr class="vAlignMiddle">
-                                            <td class="text-left px-3"><?= h($local->id) ?></td>
+                                            <td class="text-center px-3"><?= h($local->id) ?></td>
                                             <td class="text-left px-3"><?= h($local->Localidades->nome) ?></td>
                                             <td class="text-left px-3"><?= h($local->Localidades->Municipios->nome); ?></td>
-                                            <td class="text-left px-3"><?= h($local->data->format('d-m-Y')); ?></td>
-                                            <td class="text-left px-3"><?= h($aevOptions['hora'][$local->horario_id]); ?></td>
-                                            <td class="text-center px-3"></td>
-                                            <td class="text-center px-3">
+                                            <td class="text-center px-3"><?= h($local->data->format('d/m/Y')); ?></td>
+                                            <td class="text-center px-3"><?= h($aevOptions['hora'][$local->horario_id]); ?></td>
+                                            <td class="text-left px-3">
                                                 <div class="dropdown d-block">
                                                     <button class="btn btn-primary dropdown-toggle no-radius btn-sm py-0" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Opções

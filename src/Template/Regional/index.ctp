@@ -61,7 +61,7 @@
                                 <tbody class="tdMiddleAlign">
                                     <?php foreach ($regional as $local): ?>
                                         <tr class="vAlignMiddle">
-                                            <td class="text-left px-3"><?= h($local->id) ?></td>
+                                            <td class="text-center px-3"><?= h($local->id) ?></td>
                                             <td class="text-left px-3"><?= h($local->Localidades->nome) ?></td>
                                             <td class="text-left px-3"><?= h($local->Localidades->Municipios->nome); ?></td>
                                             <td class="text-left px-3"><?= h($local->data->format('d-m-Y')); ?></td>

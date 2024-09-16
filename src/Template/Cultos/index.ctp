@@ -17,22 +17,22 @@
         <?= $this->element('mobile'); ?>
 
         <div class="col-12 p-0 mb-2 mobile-hide">
-            
+
             <a class="btn btn-success no-radius" href="/Cultos/add">
                 <i class="fa fa-plus fa-sm"></i>
                 <span class="">Novo</span>
             </a>
-            
+
             <button class="btn btn-info no-radius ml-1" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-filter fa-sm"></i>
                 <span class="">Filtro</span>
-            </button>          
-            
-        </div>            
+            </button>
+
+        </div>
 
         <div class="row mobile-hide">
             <div class="col-12 mt-2 mb-2">
-                
+
                 <!-- CARD -->
                 <div class="card shadow no-radius border-1">
 
@@ -41,21 +41,20 @@
 
                         <?= $this->element('search', [ 'search' => 'Por localidade' ]); ?>
 
-                    </div>                            
+                    </div>
 
                     <!-- BODY -->
-                    <div class="card-body no-border p-0 m-0">         
+                    <div class="card-body no-border p-0 m-0">
 
                         <div class="table-responsive table-striped table-sm table-hover m-0" style="overflow-x: visible;">
                             <table id="tableResults" class="table table-bordered p-0 m-0" style="border-bottom: 0px solid white">
                                 <thead>
                                     <tr class="">
-                                        <?= $this->element('th_sort', [ 'th' => ['30%', 'Cultos.Localidade.nome', __('Localidade') ] ]); ?>
+                                        <?= $this->element('th_sort', [ 'th' => ['20%', 'Cultos.Localidade.nome', __('Localidades') ] ]); ?>
                                         <?= $this->element('th_sort', [ 'th' => ['10%', 'Cultos.dia', __('Semana') ] ]); ?>
-                                        <?= $this->element('th_sort', [ 'th' => ['10%', 'Cultos.hora', __('Hora') ] ]); ?>
+                                        <?= $this->element('th_sort', [ 'th' => ['5%', 'Cultos.hora', __('Hora') ] ]); ?>
                                         <?= $this->element('th_sort', [ 'th' => ['10%', 'Cultos.tipo', __('Tipo') ] ]); ?>
-                                        <th class="text-right" width="10%"></th>
-                                        <th class="text-right" width="10%"></th>
+                                        <th class="text-right" width="35%"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="tdMiddleAlign">
@@ -64,9 +63,8 @@
                                             <td class="text-left px-3"><?= $culto->Localidades->nome; ?></td>
                                             <td class="text-left px-3"><?= $utils['semana_id_longo'][$culto->dia]; ?></td>
                                             <td class="text-left px-3"><?= $aevOptions['hora'][$culto->hora]; ?></td>
-                                            <td class="text-left px-3"><?= $aevOptions['tipo'][$culto->tipo]; ?></td>                                            
-                                            <td class="text-center px-3"></td>
-                                            <td class="text-center px-3">
+                                            <td class="text-left px-3"><?= $aevOptions['tipo'][$culto->tipo]; ?></td>
+                                            <td class="text-left px-3">
                                                 <div class="dropdown d-block">
                                                     <button class="btn btn-primary dropdown-toggle no-radius btn-sm py-0" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Opções
@@ -97,14 +95,14 @@
 
                     </div>
                     <!-- FOOTER -->
-                    <div class="card-footer p-0 m-0"> 
+                    <div class="card-footer p-0 m-0">
                         <?php echo $this->element('pager'); ?>
-                    </div>                            
+                    </div>
                 </div>
             </div>
         </div>
-        
-    </div>      
+
+    </div>
 </div>
 
 <!-- Modal Filtro -->
@@ -123,7 +121,7 @@
                 </div>
 
                 <div class="modal-body">
-                        
+
                     <div class="form-row normal">
                         <label for="id" class="normal strong col-4">Localidade</label>
                         <div class="col-8">
@@ -141,7 +139,7 @@
                             ?>
                         </div>
                     </div>
-                        
+
                     <div class="form-row normal mt-2">
                         <label for="id" class="normal strong col-4">Dia</label>
                         <div class="col-8">
@@ -159,8 +157,8 @@
                             )
                             ?>
                         </div>
-                    </div>                                            
-                    
+                    </div>
+
                     <div class="form-row normal mt-2">
                         <label for="id" class="normal strong col-4">Hora</label>
                         <div class="col-8">
@@ -175,12 +173,12 @@
                                         'label'   => false,
                                     )
                             )
-                            ?>                        
-                        </div>                        
-                    </div>                    
-                    
-                        
-                    <div class="form-row normal mt-2">                    
+                            ?>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row normal mt-2">
                         <label for="id" class="normal strong col-4">Municipio</label>
                         <div class="col-8">
                             <?=
@@ -196,23 +194,23 @@
                             )
                             ?>
                         </div>
-                    </div>                        
-                    
+                    </div>
+
                 </div>
 
                 <div class="modal-footer bg-footer">
-                    
+
                     <button type="submit" class="btn btn-success normal no-radius">
                         <i class="fa fa-check pr-1"></i>
                         Consultar
                     </button>
-                    
+
                     <a class="btn btn-info no-radius normal" href="/Cultos/index/clear">
                         <i class="fa fa-window-close fa-sm"></i>
                         <span class="">Limpar</span>
-                    </a>                     
-                    <button type="button" class="btn btn-link no-link text-primary normal" data-dismiss="modal">Cancelar</button>   
-                    
+                    </a>
+                    <button type="button" class="btn btn-link no-link text-primary normal" data-dismiss="modal">Cancelar</button>
+
                 </div>
 
 

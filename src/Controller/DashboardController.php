@@ -48,7 +48,7 @@ class DashboardController extends AppController
 
         # --- Agenda --- #
         $semana     = $utils['semana_id_longo'];
-        $agenda = $this->load_data($municipio_id, $semana, $horarios);
+        $agenda = $this->cultos($municipio_id, $semana, $horarios);
 
         $btn_local_title = $municipios[$municipio_id];
 
@@ -83,7 +83,7 @@ class DashboardController extends AppController
         $this->set('ordenacoes', $ordenacoes);
     }
 
-    private function load_data($tipo, $semana, $horarios)
+    private function cultos($tipo, $semana, $horarios)
     {
 
         $cultosTable = TableRegistry::get('Cultos');
@@ -107,7 +107,10 @@ class DashboardController extends AppController
             $dia = $semana[$culto->dia];
             $hora = $horarios[$culto->hora];
 
-            array_push($data[$dia][$hora], $culto->Localidades->nome);
+            $localidade = [$culto->Localidades->nome, $culto->Localidades->anciaes, $culto->Localidades->rota];
+
+            //array_push($data[$dia][$hora], $culto->Localidades->nome);
+            array_push($data[$dia][$hora], $localidade);
         }
 
         return $data;

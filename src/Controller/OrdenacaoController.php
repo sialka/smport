@@ -199,27 +199,5 @@ class OrdenacaoController extends AppController {
         $this->set('aevOptions', $aevOptions);
     }
 
-    private function converte_date($data){
-
-        $dateBR = $data;
-        $dia = substr($dateBR,0,2);
-        $mes  = substr($dateBR,3,2);
-        $ano  = substr($dateBR,6,4);
-        $dataFmt = "{$ano}-{$mes}-{$dia}";
-        $dataUS = new Date($dataFmt);
-
-        return $dataUS;
-    }
-
-    private function converte_semana_dia($dataUS){
-
-        $utils = $this->utils();
-        $detalhes = getdate(strtotime($dataUS));
-        $dia_us = $detalhes['weekday'];
-        $dia_semana = $utils['semana_dia_us'][$dia_us];
-
-        return $dia_semana;
-    }
-
 
 }

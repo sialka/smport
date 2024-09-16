@@ -21,7 +21,7 @@ class EnsaioController extends AppController {
     public function initialize() {
         parent::initialize();
 
-        $this->request->session()->write('layout', 'admin');  
+        $this->request->session()->write('layout', 'admin');
         $this->loadComponent('Paginator');
         $this->loadComponent('Conditions', [
             'prefixSession'      => 'ccb',
@@ -63,9 +63,9 @@ class EnsaioController extends AppController {
 
         $conversion = array(
             'Ensaio' => array(
-                'id'        => array('name' => 'id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('ID'), 'ignore' => array('')),                
-                'nome'      => array('name' => 'Localidades.nome', 'operation' => 'LIKE', 'coalesce' => false, 'date' => false, 'alias' => __('Localidade'), 'ignore' => array('')),                                
-                'municipio' => array('name' => 'Localidades.municipio_id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('Municipio'), 'ignore' => array('')),                                
+                'id'        => array('name' => 'id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('ID'), 'ignore' => array('')),
+                'nome'      => array('name' => 'Localidades.nome', 'operation' => 'LIKE', 'coalesce' => false, 'date' => false, 'alias' => __('Localidade'), 'ignore' => array('')),
+                'municipio' => array('name' => 'Localidades.municipio_id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('Municipio'), 'ignore' => array('')),
                 '_all'      => array('name' => ['Localidades.id', 'Localidades.nome'], 'operations' => ['LIKE', 'LIKE'], 'coalesce' => false, 'date' => false, 'alias' => __('Pesquisa'), 'ignore' => array(''))
             )
         );
@@ -75,9 +75,9 @@ class EnsaioController extends AppController {
         }
 
         $_conditions = $this->Conditions->filter('Regional', $conversion, [], null, null);
-        //$_conditions['conditions'] += ['Localidades.setor' => 4];        
-        
-        $ensaio = $this->paginate($this->Ensaio->find('all')->contain(['Localidades.Municipios'])->where($_conditions['conditions']));        
+        //$_conditions['conditions'] += ['Localidades.setor' => 4];
+
+        $ensaio = $this->paginate($this->Ensaio->find('all')->contain(['Localidades.Municipios'])->where($_conditions['conditions']));
 
         //debug($ensaio);exit;
 
@@ -94,20 +94,20 @@ class EnsaioController extends AppController {
 
             $data = $this->request->data;
 
-            $new = $this->Ensaio->patchEntity($ensaio, $data);                     
+            $new = $this->Ensaio->patchEntity($ensaio, $data);
 
-            if ($this->Ensaio->save($new)) {                
-                
+            if ($this->Ensaio->save($new)) {
+
                 $this->Flash->success(__('O Ensaio foi adicionado com sucesso !!!'));
-                
+
                 return $this->redirect(['controller' => 'Ensaio', 'action' => 'index']);
-                
+
             } else {
 
                 $error_list = "<p class='mt-2'>Não foi possivel adicionar o ensaio Regional !</p>";
                 $error_list .= '<ul class="mt-3">';
                 $erros = $new->errors();
-                                
+
                 if($erros){
                     foreach($erros as $key => $value){
                         $error_list .= "<li>".implode(' ', $value) . "</li>";
@@ -115,10 +115,10 @@ class EnsaioController extends AppController {
                 }
                 $error_list .= '</ul>';
                 $this->Flash->error($error_list);
-                
+
                 return $this->redirect(['controller' => 'Ensaio', 'action' => 'add']);
             }
-        }    
+        }
 
         $this->aevOptions();
         $this->set('ensaio', $ensaio);
@@ -131,9 +131,9 @@ class EnsaioController extends AppController {
 
         if ($this->request->is('post')) {
 
-            $data = $this->request->data;                        
-            
-            $new = $this->Ensaio->patchEntity($ensaio, $data);                                   
+            $data = $this->request->data;
+
+            $new = $this->Ensaio->patchEntity($ensaio, $data);
 
             if ($this->Ensaio->save($new)) {
                 $this->Flash->success(__('O Ensaio foi alterado com sucesso !!!'));
@@ -157,14 +157,14 @@ class EnsaioController extends AppController {
     public function view($id = null){
         $ensaio = $this->Ensaio->get($id, ['contain' => ['Localidades']]);
 
-        $this->aevOptions();        
+        $this->aevOptions();
         $this->set('ensaio', $ensaio);
         $this->set('mode', 'view');
         $this->render('save');
     }
 
     public function delete($id = null){
-        
+
         $ensaio = $this->Ensaio->get($id);
 
         if($ensaio){
@@ -184,29 +184,16 @@ class EnsaioController extends AppController {
     public function aevOptions() {
 
         $aevOptions = $this->Ensaio->aevOptions();
- 
+
         $this->uteis();
-        $this->set('aevOptions', $aevOptions);        
+        $this->set('aevOptions', $aevOptions);
     }
 
     public function uteis(){
 
         $utils = $this->Utils();
-     
+
         $this->set('utils', $utils);
     }
-
-    private function converte_date($data){
-
-        $dateBR = $data;            
-        $dia = substr($dateBR,0,2);
-        $mes  = substr($dateBR,3,2);
-        $ano  = substr($dateBR,6,4);
-        $dataFmt = "{$ano}-{$mes}-{$dia}";
-        $dataUS = new Date($dataFmt);        
-        
-        return $dataUS;
-    }
-
 
 }

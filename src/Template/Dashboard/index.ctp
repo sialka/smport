@@ -27,7 +27,11 @@
     <div class="col-xl-4 offset-xl-4 col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-sm-12 col-xs-12">
 
       <?= $this->Html->image('logo.jpg', ["class"=>"img-fluid mx-auto d-block mt-2", "style" => "height:60px"]); ?>
-      <h5 class="text-center mt-2"><strong>AGENDA</strong></h5>
+      <h5 class="text-center mt-2">
+        <a href="#" id="admin" style="text-decoration: none; color: gray">
+          <strong>AGENDA</strong>
+        </a>
+      </h5>
 
       <!-- Cultos Semanal -->
 
@@ -294,6 +298,8 @@
 
 <script>
 
+let clicou = 0
+
 $(document).ready(function() {
 
   // ToolTip
@@ -302,11 +308,23 @@ $(document).ready(function() {
   // Modal
   <?= $this->element('modal_confirm'); ?>
 
+
+  $('#admin').on('click', function(){
+      // minha ação aqui
+      clicou = clicou + 1
+      if (clicou >= 5){
+        clicou = 0
+        $("#admin").attr("href", "/admin")
+      }
+  });
+
 });
 
 function changeId(id){
   console.log(id);
   $('#municipio_id').val(id);
 }
+
+
 
 </script>

@@ -226,16 +226,16 @@ return [
             'persistent' => false,
 
             # Develop
-            #'host' => '127.0.0.1',
-            #'username' => 'root',
-            #'password' => '123456',
-            #'database' => 'smport',
+            'host' => '127.0.0.1',
+            'username' => 'root',
+            'password' => '123456',
+            'database' => 'smport',
 
             # Producao
-            'host' => 'smport.mysql.dbaas.com.br',
-            'username' => 'smport',
-            'password' => 'Suporte#787923',
-            'database' => 'smport',
+            #'host' => 'smport.mysql.dbaas.com.br',
+            #'username' => 'smport',
+            #'password' => 'Suporte#787923',
+            #'database' => 'smport',
 
             /**
              * CakePHP will use the default DB port based on the driver selected

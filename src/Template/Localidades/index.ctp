@@ -62,8 +62,22 @@
                                             <td class="text-left px-3"><?= h($localidade->id) ?></td>
                                             <td class="text-left px-3"><?= h($localidade->nome) ?></td>
                                             <td class="text-left px-3"><?= $aevOptions['municipio'][$localidade->municipio_id]; ?></td>
-                                            <td class="text-center px-3"></td>
-                                            <td class="text-center px-3"></td>
+                                            <td class="text-center px-3">
+                                                <?php
+                                                    if($localidade->rota != null){
+                                                        for ($i = 1; $i <= $localidade->anciaes; $i++) {
+                                                            echo '<i class="fa fa-star text-warning"></i>';
+                                                        }
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td class="text-center px-3">
+                                                <?php if($localidade->rota != null): ?>
+                                                    <a href="<?= $localidade->rota; ?>" target='_blank'>
+                                                        <i class="fa fa-map fa-sm text-success"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </td>
                                             <td class="text-left px-3">
                                                 <div class="dropdown d-block">
                                                     <button class="btn btn-primary dropdown-toggle no-radius btn-sm py-0" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

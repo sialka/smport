@@ -21,7 +21,7 @@ class RegionalController extends AppController {
     public function initialize() {
         parent::initialize();
 
-        $this->request->session()->write('layout', 'admin');  
+        $this->request->session()->write('layout', 'admin');
         $this->loadComponent('Paginator');
         $this->loadComponent('Conditions', [
             'prefixSession'      => 'ccb',
@@ -63,9 +63,9 @@ class RegionalController extends AppController {
 
         $conversion = array(
             'Regional' => array(
-                'id'        => array('name' => 'id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('ID'), 'ignore' => array('')),                
-                'nome'      => array('name' => 'Localidades.nome', 'operation' => 'LIKE', 'coalesce' => false, 'date' => false, 'alias' => __('Localidade'), 'ignore' => array('')),                                
-                'municipio' => array('name' => 'Localidades.municipio_id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('Municipio'), 'ignore' => array('')),                                
+                'id'        => array('name' => 'id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('ID'), 'ignore' => array('')),
+                'nome'      => array('name' => 'Localidades.nome', 'operation' => 'LIKE', 'coalesce' => false, 'date' => false, 'alias' => __('Localidade'), 'ignore' => array('')),
+                'municipio' => array('name' => 'Localidades.municipio_id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('Municipio'), 'ignore' => array('')),
                 '_all'      => array('name' => ['Localidades.id', 'Localidades.nome'], 'operations' => ['LIKE', 'LIKE'], 'coalesce' => false, 'date' => false, 'alias' => __('Pesquisa'), 'ignore' => array(''))
             )
         );
@@ -75,9 +75,9 @@ class RegionalController extends AppController {
         }
 
         $_conditions = $this->Conditions->filter('Regional', $conversion, [], null, null);
-        //$_conditions['conditions'] += ['Localidades.setor' => 4];        
-        
-        $regional = $this->paginate($this->Regional->find('all')->contain(['Localidades.Municipios'])->where($_conditions['conditions']));        
+        //$_conditions['conditions'] += ['Localidades.setor' => 4];
+
+        $regional = $this->paginate($this->Regional->find('all')->contain(['Localidades.Municipios'])->where($_conditions['conditions']));
 
         //debug($batismo);
 
@@ -97,22 +97,22 @@ class RegionalController extends AppController {
             $new = $this->Regional->patchEntity($regional, $data);
 
             $dataUS = $this->converte_date($data['data']);
-            
-            $new->data = $dataUS;
-            $new->dia_semana = $this->converte_semana_dia($dataUS);             
 
-            if ($this->Regional->save($new)) {                
-                
+            $new->data = $dataUS;
+            $new->dia_semana = $this->converte_semana_dia($dataUS);
+
+            if ($this->Regional->save($new)) {
+
                 $this->Flash->success(__('O Ensario Regional foi adicionado com sucesso !!!'));
-                
+
                 return $this->redirect(['controller' => 'Regional', 'action' => 'index']);
-                
+
             } else {
 
                 $error_list = "<p class='mt-2'>Não foi possivel adicionar o ensaio Regional !</p>";
                 $error_list .= '<ul class="mt-3">';
                 $erros = $new->errors();
-                                
+
                 if($erros){
                     foreach($erros as $key => $value){
                         $error_list .= "<li>".implode(' ', $value) . "</li>";
@@ -120,11 +120,11 @@ class RegionalController extends AppController {
                 }
                 $error_list .= '</ul>';
                 $this->Flash->error($error_list);
-                
+
                 return $this->redirect(['controller' => 'Regional', 'action' => 'add']);
             }
-        }      
-        
+        }
+
 
         $this->aevOptions();
         $this->set('regional', $regional);
@@ -137,14 +137,14 @@ class RegionalController extends AppController {
 
         if ($this->request->is('post')) {
 
-            $data = $this->request->data;            
+            $data = $this->request->data;
 
             $dataUS = $this->converte_date($data['data']);
-            
-            $new = $this->Regional->patchEntity($regional, $data);            
+
+            $new = $this->Regional->patchEntity($regional, $data);
 
             $new->data = $dataUS;
-            $new->dia_semana = $this->converte_semana_dia($dataUS);            
+            $new->dia_semana = $this->converte_semana_dia($dataUS);
 
             if ($this->Regional->save($new)) {
                 $this->Flash->success(__('O Batismo foi alterado com sucesso !!!'));
@@ -175,7 +175,7 @@ class RegionalController extends AppController {
     }
 
     public function delete($id = null){
-        
+
         $regional = $this->Regional->get($id);
 
         if($regional){
@@ -197,30 +197,7 @@ class RegionalController extends AppController {
         $aevOptions = $this->Regional->aevOptions();
 
 
-        $this->set('aevOptions', $aevOptions);        
+        $this->set('aevOptions', $aevOptions);
     }
-
-    private function converte_date($data){
-
-        $dateBR = $data;            
-        $dia = substr($dateBR,0,2);
-        $mes  = substr($dateBR,3,2);
-        $ano  = substr($dateBR,6,4);
-        $dataFmt = "{$ano}-{$mes}-{$dia}";
-        $dataUS = new Date($dataFmt);        
-        
-        return $dataUS;
-    }
-
-    private function converte_semana_dia($dataUS){
-
-        $utils = $this->utils();
-        $detalhes = getdate(strtotime($dataUS));
-        $dia_us = $detalhes['weekday'];                    
-        $dia_semana = $utils['semana_dia_us'][$dia_us]; 
-
-        return $dia_semana;
-    }
-
 
 }

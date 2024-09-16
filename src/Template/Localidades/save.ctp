@@ -31,9 +31,9 @@ $nav = [
 
 <div class="container-row">
     <div class="col-4 offset-4">
-        
+
         <?= $this->Form->create($localidade, array('class' => 'form-horizontal needs-validation', 'type' => 'post', 'novalidate')) ?>
-        
+
         <div class="card shadow border-1 no-radius mb-4">
 
             <div class="card-header py-3">
@@ -74,10 +74,24 @@ $nav = [
                                 )
                             );
                         ?>
-                    </div>           
-
+                    </div>
                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                        <label for="status" class="strong">Status</label>
+                        <label for="nome" class="strong">Rota:</label>
+                        <?=
+                        $this->Form->input('rota',
+                                array(
+                                    'class'       => 'form-control no-radius',
+                                    'id'          => 'rota',
+                                    'placeholder' => '',
+                                    'type'        => 'text',
+                                    'div'         => false,
+                                    'label'       => false,
+                                )
+                        )
+                        ?>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                        <label for="status" class="strong">Municipio</label>
                         <?=
                         $this->Form->input('municipio_id',
                                 array(
@@ -88,6 +102,23 @@ $nav = [
                                     'options' => $aevOptions['municipio'],
                                     'div' => false,
                                     'label' => false,
+                                    'required'
+                                )
+                        )
+                        ?>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                        <label for="nome" class="strong">Anciães:</label>
+                        <?=
+                        $this->Form->input('anciaes',
+                                array(
+                                    'class'       => 'form-control no-radius',
+                                    'id'          => 'anciaes',
+                                    'placeholder' => '',
+                                    'type'        => 'select',
+                                    'options'     => ['' => '', '1' => '1 Ancião', '2' => '2 Anciães', '3' => '3 Anciães', '4' => '4 Anciães', '5' => '5 Anciães', '6' => '6 Anciães'],
+                                    'div'         => false,
+                                    'label'       => false,
                                     'required'
                                 )
                         )

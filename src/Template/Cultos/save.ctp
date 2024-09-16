@@ -33,9 +33,9 @@ if($session != null){
 
 <div class="container-row">
     <div class="col-6 offset-3">
-        
+
         <?= $this->Form->create($culto, array('class' => 'form-horizontal needs-validation', 'type' => 'post', 'novalidate')) ?>
-        
+
         <div class="card shadow border-1 no-radius mb-4">
 
             <div class="card-header py-3">
@@ -55,7 +55,7 @@ if($session != null){
                             echo __("<label class='form-control disabled no-radius text-center'><strong>0</strong></label>");
                         }else{
                             echo __("<label class='form-control disabled no-radius text-center'><strong>{$culto->id}</strong></label>");
-                        } 
+                        }
                         ?>
                     </div>
                 </div>
@@ -86,9 +86,9 @@ if($session != null){
                                     'required'
                                 )
                                 );
-                        
+
                         ?>
-                    </div>                  
+                    </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-12">
                         <label for="nome" class="strong">Dia:</label>
                         <?=
@@ -122,7 +122,8 @@ if($session != null){
                                 )
                         )
                         ?>
-                    </div>        
+                    </div>
+
                     <div class="form-group col-lg-6 col-md-6 col-sm-12">
                         <label for="nome" class="strong">Tipo de Culto:</label>
                         <?=
@@ -226,7 +227,7 @@ if($session != null){
     <?php } ?>
 
     <?= $this->element('typeahead'); ?>
-    
+
     function recarregarTypeAheadIgrejas() {
         $('.igreja .typeahead').typeahead('destroy');
 
@@ -236,7 +237,7 @@ if($session != null){
             model:          'localidades',
             suggestion:     ['nome','Municipios.nome'],
             selector:       '.igrejas',
-            modelAlias:     'localidades',            
+            modelAlias:     'localidades',
             suggestionStyle: 'font-size: 100%;',
             fillFields: [
                 { selector: '#localidade_id', field: 'id' },

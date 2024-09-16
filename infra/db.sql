@@ -3,10 +3,15 @@ CREATE TABLE IF NOT EXISTS `localidades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `municipio_id` int(11) NOT NULL,
+  `rota` VARCHAR(255),
+  `anciaes` CHAR(2) DEFAULT '0',
   `created` timestamp NULL DEFAULT NULL,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+ALTER TABLE `cultos` ADD COLUMN `rota` VARCHAR(255)
+ALTER TABLE `cultos` ADD COLUMN `anciaes` CHAR(2) DEFAULT '0'
 
 DROP TABLE IF EXISTS `cultos`;
 CREATE TABLE IF NOT EXISTS `cultos` (
@@ -15,6 +20,8 @@ CREATE TABLE IF NOT EXISTS `cultos` (
   `dia` varchar(40) NOT NULL,
   `hora` varchar(5) NOT NULL,
   `tipo` char(1) NOT NULL,
+  `rota` VARCHAR(255),
+  `anciaes` CHAR(2) DEFAULT '0',
   `created` timestamp NULL DEFAULT NULL,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -41,10 +48,16 @@ CREATE TABLE IF NOT EXISTS `regional` (
   `data` date NOT NULL,
   `horario_id` INT NOT NULL,
   `dia_semana` CHAR(1) NOT NULL DEFAULT '1',
+  `regionais` VARCHAR(255),
+  `avaliacao` CHAR(1),
   `created` timestamp NULL DEFAULT NULL,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+ALTER TABLE `regional` ADD COLUMN `regionais` VARCHAR(255)
+ALTER TABLE `regional` ADD COLUMN `avaliacao` CHAR(1)
+
 
 DROP TABLE `batismo`
 CREATE TABLE IF NOT EXISTS `batismo` (

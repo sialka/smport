@@ -24,28 +24,28 @@ class RegionalTable extends Table
             'className'         => 'Localidades',
             'bindingKey'        => 'localidade_id',
             'foreignKey'        => 'id',
-            'propertyName'      => 'Localidades',            
-        ]);  
+            'propertyName'      => 'Localidades',
+        ]);
 
         $this->hasOne('Horarios', [
             'className'         => 'Horarios',
             'bindingKey'        => 'horario_id',
             'foreignKey'        => 'id',
-            'propertyName'      => 'Horarios',            
-        ]); 
+            'propertyName'      => 'Horarios',
+        ]);
 
     }
 
     public function aevOptions(){
 
-        $horariosTable = TableRegistry::get('horarios');                            
+        $horariosTable = TableRegistry::get('horarios');
         $horarios = $horariosTable->find('list')->order(['hora' => 'asc'])->toArray();
 
         $aevOptions = [
-            'hora' => $horarios,            
+            'hora' => $horarios,
         ];
 
         return $aevOptions;
     }
-  
+
 }

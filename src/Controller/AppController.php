@@ -5,6 +5,9 @@ use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\Network\Session;
+use Cake\I18n\Time;
+use Cake\I18n\Date;
+
 
 class AppController extends Controller
 {
@@ -17,14 +20,14 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Security');
-        
+
     }
 
     public function beforeFilter(Event $event){
        $this->Security->config('blackHoleCallback', 'blackhole');
     }
 
-    public function beforeRender(Event $event){        
+    public function beforeRender(Event $event){
 
         if (!isset($this->viewVars['_notSerialize'])) {
             if (($this->request->is('ajax')) || (in_array($this->response->type(), ['application/json', 'application/xml']))) {
@@ -48,14 +51,14 @@ class AppController extends Controller
             $this->viewBuilder()->setLayout('default');
         }else{
 
-            if($layout == 'admin'){            
+            if($layout == 'admin'){
                $this->viewBuilder()->setLayout('admin');
             }else{
                 $this->viewBuilder()->setLayout('login');
             }
         }
 
-    }    
+    }
 
     public function blackhole($type, \Cake\Controller\Exception\SecurityException $exception) {
         throw $exception;
@@ -125,6 +128,28 @@ class AppController extends Controller
         ];
 
         return $util;
+
+    }
+
+    public function converte_date($data){
+
+        $dateBR = $data;
+        $dia = substr($dateBR,0,2);
+        $mes  = substr($dateBR,3,2);
+        $ano  = substr($dateBR,6,4);
+        $dataFmt = "{$ano}-{$mes}-{$dia}";
+        $dataUS = new Date($dataFmt);
+
+        return $dataUS;
+    }
+
+    public function converte_semana_dia($dataUS){
+
+        $utils = $this->utils();
+        $week = $dataUS->format('l');
+        $dia_semana = $utils['semana_dia_us'][$week];
+
+        return $dia_semana;
     }
 
 }

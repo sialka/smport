@@ -59,7 +59,7 @@
                                 <tbody class="tdMiddleAlign">
                                     <?php foreach ($localidades as $localidade): ?>
                                         <tr class="vAlignMiddle">
-                                            <td class="text-left px-3"><?= h($localidade->id) ?></td>
+                                            <td class="text-center px-3"><?= h($localidade->id) ?></td>
                                             <td class="text-left px-3"><?= h($localidade->nome) ?></td>
                                             <td class="text-left px-3"><?= $aevOptions['municipio'][$localidade->municipio_id]; ?></td>
                                             <td class="text-center px-3">

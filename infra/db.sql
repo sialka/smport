@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `regional` (
 
 ALTER TABLE `regional` ADD COLUMN `regionais` VARCHAR(255)
 ALTER TABLE `regional` ADD COLUMN `avaliacao` CHAR(1)
+ALTER TABLE regional ADD COLUMN palavra VARCHAR(255)
 
 
 DROP TABLE `batismo`

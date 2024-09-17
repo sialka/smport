@@ -109,6 +109,7 @@ $hoje = Time::now()->format('d/m/Y');
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group col-lg-6 col-md-6 col-sm-12">
                         <label for="nome" class="strong">Hora:</label>
                         <?=
@@ -126,6 +127,23 @@ $hoje = Time::now()->format('d/m/Y');
                         )
                         ?>
                     </div>
+
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                        <label for="palavra" class="strong">Palavra:</label>
+                        <?=
+                        $this->Form->input('palavra',
+                                array(
+                                    'class'       => 'form-control no-radius',
+                                    'id'          => 'palavra',
+                                    'placeholder' => 'Livro / Capitulo',
+                                    'type'        => 'text',
+                                    'div'         => false,
+                                    'label'       => false,
+                                )
+                        )
+                        ?>
+                    </div>
+
                 </div>
 
                 <div class='row'>
@@ -136,7 +154,7 @@ $hoje = Time::now()->format('d/m/Y');
                                 array(
                                     'class'       => 'form-control no-radius',
                                     'id'          => 'regionais',
-                                    'placeholder' => 'Nome / Comum',
+                                    'placeholder' => 'Regional / Municipio',
                                     'type'        => 'text',
                                     'div'         => false,
                                     'label'       => false,
@@ -153,7 +171,7 @@ $hoje = Time::now()->format('d/m/Y');
                                     'id'          => 'avaliacao',
                                     'placeholder' => '',
                                     'type'        => 'select',
-                                    'options'     => ['' => ''] + [1 => 'Normal', 2 => 'Bom', 3 => 'Excelente'],
+                                    'options'     => ['' => '-'] + [1 => 'Normal', 2 => 'Bom', 3 => 'Excelente'],
                                     'div'         => false,
                                     'label'       => false,
                                 )

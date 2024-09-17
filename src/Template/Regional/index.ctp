@@ -51,10 +51,11 @@
                                         <?= $this->element('th_sort', [ 'th' => ['10%', 'Regional.id', __('Código') ] ]); ?>
                                         <?= $this->element('th_sort', [ 'th' => ['20%', 'Regional.Localidades.nome', __('Localidades') ] ]); ?>
                                         <?= $this->element('th_sort', [ 'th' => ['10%', 'Regional.Localidades.Municipio.id', __('Municipio') ] ]); ?>
-                                        <?= $this->element('th_sort', [ 'th' => ['10%', 'Regional.data', __('Data') ] ]); ?>
-                                        <?= $this->element('th_sort', [ 'th' => ['10%', 'Regional.hora', __('Hora') ] ]); ?>
-                                        <th class="text-center" width="15%">Regional</th>
-                                        <th class="text-center" width="15%">Avaliação</th>
+                                        <?= $this->element('th_sort', [ 'th' => ['05%', 'Regional.data', __('Data') ] ]); ?>
+                                        <?= $this->element('th_sort', [ 'th' => ['05%', 'Regional.hora', __('Hora') ] ]); ?>
+                                        <?= $this->element('th_sort', [ 'th' => ['10%', 'Regional.palavra', __('Palavra') ] ]); ?>
+                                        <?= $this->element('th_sort', [ 'th' => ['20%', 'Regional.regionais', __('Atendimento') ] ]); ?>
+                                        <th class="text-center" width="10%">Avaliação</th>
                                         <th class="text-right" width="10%"></th>
                                     </tr>
                                 </thead>
@@ -64,9 +65,10 @@
                                             <td class="text-center px-3"><?= h($local->id) ?></td>
                                             <td class="text-left px-3"><?= h($local->Localidades->nome) ?></td>
                                             <td class="text-left px-3"><?= h($local->Localidades->Municipios->nome); ?></td>
-                                            <td class="text-left px-3"><?= h($local->data->format('d-m-Y')); ?></td>
+                                            <td class="text-left px-3"><?= h($local->data->format('d/m/Y')); ?></td>
                                             <td class="text-left px-3"><?= h($aevOptions['hora'][$local->horario_id]); ?></td>
-                                            <td class="text-center px-3"><?= h($local->regionais) ?></td>
+                                            <td class="text-left px-3"><?= h($local->palavra) ?></td>
+                                            <td class="text-left px-3"><?= h($local->regionais) ?></td>
                                             <td class="text-center px-3 text-warning">
                                                 <?php
                                                     for ($i = 1; $i <= $local->avaliacao; $i++) {

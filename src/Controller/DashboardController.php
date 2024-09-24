@@ -157,7 +157,7 @@ class DashboardController extends AppController
             # Dia da Semana
             $dia_br = $utils['semana_id_longo'][$info->dia_semana];
 
-            array_push($batismo["{$data} - {$dia_br}"], "{$horarios[$hora]} - {$cidade} - {$igreja}");
+            array_push($batismo["{$data} - {$dia_br}"], "{$horarios[$hora]} - {$igreja}");
         }
 
         return $batismo;
@@ -195,7 +195,7 @@ class DashboardController extends AppController
             # Dia da Semana
             $dia_br = $utils['semana_id_longo'][$info->dia_semana];
 
-            array_push($ordenacao["{$data} - {$dia_br}"], "{$horarios[$hora]} - {$cidade} - {$igreja}");
+            array_push($ordenacao["{$data} - {$dia_br}"], "{$horarios[$hora]} - {$igreja}");
         }
 
         return $ordenacao;
@@ -232,7 +232,7 @@ class DashboardController extends AppController
             # Dia da Semana
             $dia_br = $utils['semana_id_longo'][$info->dia_semana];
 
-            array_push($reuniao["{$data} - {$dia_br}"], "{$horarios[$hora]} - {$cidade} - {$igreja}");
+            array_push($reuniao["{$data} - {$dia_br}"], "{$horarios[$hora]} - {$igreja}");
         }
 
         return $reuniao;
@@ -270,7 +270,7 @@ class DashboardController extends AppController
             # Dia da Semana
             $dia_br = $utils['semana_id_longo'][$info->dia_semana];
 
-            array_push($regional["{$data} - {$dia_br}"], "{$horarios[$hora]} - {$cidade} - {$igreja}");
+            array_push($regional["{$data} - {$dia_br}"], "{$horarios[$hora]} - {$igreja}");
         }
 
         return $regional;

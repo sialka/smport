@@ -19,7 +19,7 @@ class LocalidadesController extends AppController {
     public function initialize() {
         parent::initialize();
 
-        $this->request->session()->write('layout', 'admin');  
+        $this->request->session()->write('layout', 'admin');
         $this->loadComponent('Paginator');
         $this->loadComponent('Conditions', [
             'prefixSession'      => 'ccb',
@@ -61,9 +61,9 @@ class LocalidadesController extends AppController {
 
         $conversion = array(
             'Localidades' => array(
-                'id'        => array('name' => 'id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('ID'), 'ignore' => array('')),                
-                'nome'      => array('name' => 'Localidades.nome', 'operation' => 'LIKE', 'coalesce' => false, 'date' => false, 'alias' => __('Localidade'), 'ignore' => array('')),                                
-                'municipio' => array('name' => 'Localidades.municipio_id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('Municipio'), 'ignore' => array('')),                                
+                'id'        => array('name' => 'id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('ID'), 'ignore' => array('')),
+                'nome'      => array('name' => 'Localidades.nome', 'operation' => 'LIKE', 'coalesce' => false, 'date' => false, 'alias' => __('Localidade'), 'ignore' => array('')),
+                'municipio' => array('name' => 'Localidades.municipio_id', 'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('Municipio'), 'ignore' => array('')),
                 '_all'      => array('name' => ['Localidades.id', 'Localidades.nome'], 'operations' => ['LIKE', 'LIKE'], 'coalesce' => false, 'date' => false, 'alias' => __('Pesquisa'), 'ignore' => array(''))
             )
         );
@@ -73,9 +73,9 @@ class LocalidadesController extends AppController {
         }
 
         $_conditions = $this->Conditions->filter('Localidades', $conversion, [], null, null);
-        //$_conditions['conditions'] += ['Localidades.setor' => 4];        
+        //$_conditions['conditions'] += ['Localidades.setor' => 4];
 
-        $localidades = $this->paginate($this->Localidades->find('all')->contain(['Municipios'])->where($_conditions['conditions']));        
+        $localidades = $this->paginate($this->Localidades->find('all')->contain(['Municipios'])->where($_conditions['conditions']));
 
         //debug($localidades);
 
@@ -94,18 +94,18 @@ class LocalidadesController extends AppController {
 
             $new = $this->Localidades->patchEntity($localidade, $data);
 
-            if ($this->Localidades->save($new)) {                
-                
+            if ($this->Localidades->save($new)) {
+
                 $this->Flash->success(__('A localidade <strong>' .$new->nome.'</strong> foi adicionada com sucesso !!!'));
-                
+
                 return $this->redirect(['controller' => 'Localidades', 'action' => 'index']);
-                
+
             } else {
 
                 $error_list = "<p class='mt-2'>Não foi possivel adicionar a Localidade <strong> {$new->nome}: </strong></p>";
                 $error_list .= '<ul class="mt-3">';
                 $erros = $new->errors();
-                                
+
                 if($erros){
                     foreach($erros as $key => $value){
                         $error_list .= "<li>".implode(' ', $value) . "</li>";
@@ -113,11 +113,11 @@ class LocalidadesController extends AppController {
                 }
                 $error_list .= '</ul>';
                 $this->Flash->error($error_list);
-                
+
                 return $this->redirect(['controller' => 'Localidades', 'action' => 'add']);
             }
-        }      
-        
+        }
+
 
         $this->aevOptions();
         $this->set('localidade', $localidade);
@@ -186,8 +186,8 @@ class LocalidadesController extends AppController {
 
         //$this->set('aevOptions', $aevOptions);
 
-        
-        $cultosTable = TableRegistry::get('Cultos');                    
+
+        $cultosTable = TableRegistry::get('Cultos');
 
         $aevOptions = $cultosTable->aevOptions();
 

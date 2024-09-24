@@ -10,8 +10,6 @@ CREATE TABLE IF NOT EXISTS `localidades` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-ALTER TABLE `cultos` ADD COLUMN `rota` VARCHAR(255)
-ALTER TABLE `cultos` ADD COLUMN `anciaes` CHAR(2) DEFAULT '0'
 
 DROP TABLE IF EXISTS `cultos`;
 CREATE TABLE IF NOT EXISTS `cultos` (
@@ -55,10 +53,6 @@ CREATE TABLE IF NOT EXISTS `regional` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
-ALTER TABLE `regional` ADD COLUMN `regionais` VARCHAR(255)
-ALTER TABLE `regional` ADD COLUMN `avaliacao` CHAR(1)
-ALTER TABLE regional ADD COLUMN palavra VARCHAR(255)
-
 
 DROP TABLE `batismo`
 CREATE TABLE IF NOT EXISTS `batismo` (
@@ -71,9 +65,6 @@ CREATE TABLE IF NOT EXISTS `batismo` (
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
-
-alter table batismo
-add column `dia_semana` CHAR(1) NOT NULL DEFAULT '1'
 
 
 DROP TABLE `horarios`
@@ -96,10 +87,6 @@ CREATE TABLE IF NOT EXISTS `municipios` (
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
-
-
-ALTER TABLE `municipios` ADD `favorito` char(1) DEFAULT '0';
-
 
 DROP TABLE `reuniao`
 CREATE TABLE IF NOT EXISTS `reuniao` (
@@ -150,15 +137,16 @@ INSERT INTO `users` (`id`, `nome`, `username`, `email`, `password`, `status`, `c
 -- Estrutura da tabela `municipio`
 --
 
-DROP TABLE IF EXISTS `municipio`;
-CREATE TABLE IF NOT EXISTS `municipio` (
+DROP TABLE IF EXISTS `municipios`;
+CREATE TABLE IF NOT EXISTS `municipios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
+  `favorito` tinyint(1) DEFAULT '0',
   `created` timestamp NULL DEFAULT NULL,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
-INSERT INTO `municipio` (`id`, `nome`, `created`, `modified`) VALUES (1, 'guarulhos', NULL, NULL);
-INSERT INTO `municipio` (`id`, `nome`, `created`, `modified`) VALUES (2, 'itaquaquecetuba', NULL, NULL);
+INSERT INTO `municipios` (`id`, `nome`, `favorito`, `created`, `modified`) VALUES (1, 'guarulhos', '1', NULL, NULL);
+INSERT INTO `municipios` (`id`, `nome`, `favorito`, `created`, `modified`) VALUES (2, 'itaquaquecetuba', '0', NULL, NULL);
 

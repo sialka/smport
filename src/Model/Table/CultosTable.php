@@ -25,23 +25,32 @@ class CultosTable extends Table
             'bindingKey'        => 'localidade_id',
             'foreignKey'        => 'id',
             'propertyName'      => 'Localidades',
-            
-        ]);  
+
+        ]);
 
     }
-    
+
     public function aevOptions(){
 
-        $horariosTable = TableRegistry::get('horarios');                            
+        $horariosTable = TableRegistry::get('horarios');
         $horarios = $horariosTable->find('list')->order(['hora' => 'asc'])->toArray();
 
-        $municipiosTable = TableRegistry::get('municipios');                    
-        $municipios = $municipiosTable->find('list')->order(['nome' => 'asc'])->toArray();       
-        
+        $municipiosTable = TableRegistry::get('municipios');
+        $municipios = $municipiosTable->find('list')->order(['nome' => 'asc'])->toArray();
+
         $aevOptions = [
             'municipio' => $municipios,
-            'hora' => $horarios,
-            'tipo' => ['CULTO OFICIAL', 'RJM'],
+            'hora'      => $horarios,
+            'tipo'      => ['CULTO OFICIAL', 'RJM'],
+            'anciaes'   => [
+                '0' => 'Nenhum',
+                '1' => '1 Ancião',
+                '2' => '2 Anciães',
+                '3' => '3 Anciães',
+                '4' => '4 Anciães',
+                '5' => '5 Anciães',
+                '6' => '6 Anciães'
+            ],
         ];
 
         return $aevOptions;

@@ -27,16 +27,16 @@ $hoje = Time::now()->format('d/m/Y');
 
 <?= $this->element('breadcrumb', ['nav' => $nav]); ?>
 
-<div class="container-row">
-    <div class="col-6 offset-3">
-        
+<div class="container-row mt-2">
+    <div class="col-xxl-4 offset-xxl-4 col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-xs-12">
+
         <?= $this->Form->create($batismo, array('class' => 'form-horizontal needs-validation', 'type' => 'post', 'novalidate')) ?>
-        
+
         <div class="card shadow border-1 no-radius mb-4">
 
             <div class="card-header py-3">
-                <h6 class="strong p-0 m-0 text-primary">
-                    <i class="fas fa-map-marker-alt"></i>
+                <h6 class="strong p-0 m-0 text-secondary">
+                    <i class="fas fa-calendar"></i>
                     <?= $title ?>
                 </h6>
             </div>
@@ -51,7 +51,7 @@ $hoje = Time::now()->format('d/m/Y');
                             echo __("<label class='form-control disabled no-radius text-center'><strong>0</strong></label>");
                         }else{
                             echo __("<label class='form-control disabled no-radius text-center'><strong>{$batismo->id}</strong></label>");
-                        } 
+                        }
                         ?>
                     </div>
                 </div>
@@ -82,30 +82,30 @@ $hoje = Time::now()->format('d/m/Y');
                                     'required'
                                 )
                                 );
-                        
+
                         ?>
-                    </div>                  
+                    </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-12">
                         <label for="nome" class="strong">Data:</label>
-                        <div class='input-group'>         
+                        <div class='input-group'>
                             <?=
                             $this->Form->input('data',
                                     array(
                                         'class'       => 'form-control no-radius datepicker',
                                         'id'          => 'datepicker',
                                         'placeholder' => 'Data',
-                                        'type'        => 'text',                                    
+                                        'type'        => 'text',
                                         'div'         => false,
                                         'label'       => false,
                                         'value'       => strlen($batismo->data) > 0 ? $batismo->data->format('d/m/Y') : $hoje,
                                         'required'
                                     )
                             )
-                            ?>                  
-                            <div class="input-group-prepend">  
+                            ?>
+                            <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     <i class="fa fa-calendar"></i>
-                                </span>            
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@ $hoje = Time::now()->format('d/m/Y');
                                 )
                         )
                         ?>
-                    </div>                   
+                    </div>
                 </div>
 
                 <?php if (in_array($mode, ['view'])) { ?>
@@ -169,7 +169,7 @@ $hoje = Time::now()->format('d/m/Y');
             </div>
 
             <div class="card-footer bg-light">
-                <div class="text-right">
+                <div class="text-end">
 
                     <?php if ($mode != "view") { ?>
 
@@ -181,7 +181,7 @@ $hoje = Time::now()->format('d/m/Y');
                     <?php } ?>
 
 
-                    <a class="btn btn-link no-link" href="/Batismo/index">
+                    <a class="btn btn-light no-radius no-link" href="/Batismo/index">
                         <i class="fa fa-reply"></i>
                         Voltar
                     </a>
@@ -199,24 +199,22 @@ $hoje = Time::now()->format('d/m/Y');
 <script>
     $(document).ready(function () {
 
-        $('#codigo').mask('00-0000');
-
-        <?php 
+        <?php
         if (in_array($mode, ['edit', 'view'])): ?>
                     $('#codigo').attr('readonly', 'readonly');
                     $('#codigo').attr('disabled', 'disabled');
-        <?php 
+        <?php
         endif; ?>
 
-        <?php 
+        <?php
         if (in_array($mode, ['view'])): ?>
                 $('input, select, check, radio, textarea').attr('readonly', 'readonly');
-                $('input, select, check, radio, textarea').attr('disabled', 'disabled');                
-        <?php 
+                $('input, select, check, radio, textarea').attr('disabled', 'disabled');
+        <?php
         endif; ?>
 
         <?= $this->element('typeahead'); ?>
-    
+
         function recarregarTypeAheadIgrejas() {
             $('.igreja .typeahead').typeahead('destroy');
 
@@ -226,7 +224,7 @@ $hoje = Time::now()->format('d/m/Y');
                 model:          'localidades',
                 suggestion:     ['nome','Municipios.nome'],
                 selector:       '.igrejas',
-                modelAlias:     'localidades',            
+                modelAlias:     'localidades',
                 suggestionStyle: 'font-size: 100%;',
                 fillFields: [
                     { selector: '#localidade_id', field: 'id' },
@@ -236,10 +234,10 @@ $hoje = Time::now()->format('d/m/Y');
             LoadSearchTypeAhead(options);
         }
 
-        recarregarTypeAheadIgrejas();         
+        recarregarTypeAheadIgrejas();
 
         $('.datepicker').datepicker({
-            language: "pt-BR",            
+            language: "pt-BR",
         });
 
     });

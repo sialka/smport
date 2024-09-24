@@ -27,16 +27,16 @@ $hoje = Time::now()->format('d/m/Y');
 
 <?= $this->element('breadcrumb', ['nav' => $nav]); ?>
 
-<div class="container-row">
-    <div class="col-6 offset-3">
+<div class="container-row mt-2">
+    <div class="col-xxl-4 offset-xxl-4 col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-xs-12">
 
         <?= $this->Form->create($regional, array('class' => 'form-horizontal needs-validation', 'type' => 'post', 'novalidate')) ?>
 
         <div class="card shadow border-1 no-radius mb-4">
 
             <div class="card-header py-3">
-                <h6 class="strong p-0 m-0 text-primary">
-                    <i class="fas fa-map-marker-alt"></i>
+                <h6 class="strong p-0 m-0 text-secondary">
+                    <i class="fas fa-calendar"></i>
                     <?= $title ?>
                 </h6>
             </div>
@@ -221,7 +221,7 @@ $hoje = Time::now()->format('d/m/Y');
             </div>
 
             <div class="card-footer bg-light">
-                <div class="text-right">
+                <div class="text-end">
 
                     <?php if ($mode != "view") { ?>
 
@@ -233,7 +233,7 @@ $hoje = Time::now()->format('d/m/Y');
                     <?php } ?>
 
 
-                    <a class="btn btn-link no-link" href="/Regional/index">
+                    <a class="btn btn-light no-radius    no-link" href="/Regional/index">
                         <i class="fa fa-reply"></i>
                         Voltar
                     </a>
@@ -250,8 +250,6 @@ $hoje = Time::now()->format('d/m/Y');
 
 <script>
     $(document).ready(function () {
-
-        $('#codigo').mask('00-0000');
 
         <?php
         if (in_array($mode, ['edit', 'view'])): ?>

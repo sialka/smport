@@ -29,15 +29,15 @@ $nav = [
 
 <?= $this->element('breadcrumb', ['nav' => $nav]); ?>
 
-<div class="container-row">
-    <div class="col-4 offset-4">
+<div class="container-row mt-2">
+    <div class="col-xxl-4 offset-xxl-4 col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-xs-12">
 
         <?= $this->Form->create($localidade, array('class' => 'form-horizontal needs-validation', 'type' => 'post', 'novalidate')) ?>
 
         <div class="card shadow border-1 no-radius mb-4">
 
             <div class="card-header py-3">
-                <h6 class="strong p-0 m-0 text-primary">
+                <h6 class="strong p-0 m-0 text-dark">
                     <i class="fas fa-map-marker-alt"></i>
                     <?= $title ?>
                 </h6>
@@ -116,7 +116,7 @@ $nav = [
                                     'id'          => 'anciaes',
                                     'placeholder' => '',
                                     'type'        => 'select',
-                                    'options'     => ['' => '', '1' => '1 Ancião', '2' => '2 Anciães', '3' => '3 Anciães', '4' => '4 Anciães', '5' => '5 Anciães', '6' => '6 Anciães'],
+                                    'options'     => ['' => ''] + $aevOptions['anciaes'],
                                     'div'         => false,
                                     'label'       => false,
                                     'required'
@@ -167,7 +167,7 @@ $nav = [
             </div>
 
             <div class="card-footer bg-light">
-                <div class="text-right">
+                <div class="text-end">
 
                     <?php if ($mode != "view") { ?>
 
@@ -179,7 +179,7 @@ $nav = [
                     <?php } ?>
 
 
-                    <a class="btn btn-link no-link" href="/Localidades/index">
+                    <a class="btn btn-light no-radius no-link" href="/Localidades/index">
                         <i class="fa fa-reply"></i>
                         Voltar
                     </a>
@@ -196,8 +196,6 @@ $nav = [
 
 <script>
     $(document).ready(function () {
-
-        $('#codigo').mask('00-0000');
 
 <?php if (in_array($mode, ['edit', 'view'])) { ?>
             $('#codigo').attr('readonly', 'readonly');

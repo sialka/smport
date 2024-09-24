@@ -6,96 +6,77 @@
 <?= $this->element('breadcrumb', [ 'nav' => $nav ]); ?>
 
 <div class="container-row">
-    <div class="col-12">
+    <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
         <?= $this->Flash->render() ?>
     </div>
 </div>
 
-<div class="container-row">
-    <div class="col-12">
+<div class="container-row p-2">
+    <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
 
-        <?= $this->element('mobile'); ?>
-
-        <div class="col-12 p-0 mb-2 mobile-hide">
-
+        <div class="col-12 p-0 mb-2">
             <a class="btn btn-success no-radius" href="/Cultos/add">
                 <i class="fa fa-plus fa-sm"></i>
                 <span class="">Novo</span>
             </a>
 
-            <button class="btn btn-info no-radius ml-1" data-toggle="modal" data-target="#exampleModal">
+            <button class="btn btn-info no-radius ml-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="fa fa-filter fa-sm"></i>
                 <span class="">Filtro</span>
             </button>
-
         </div>
 
-        <div class="row mobile-hide">
-            <div class="col-12 mt-2 mb-2">
+        <div class="row">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
 
                 <!-- CARD -->
                 <div class="card shadow no-radius border-1">
 
                     <!-- HEADER -->
-                    <div class="card-header p-2 m-0 d-flex justify-content-between">
-
+                    <div class="card-header no-radius" style="border-bottom: 0px">
                         <?= $this->element('search', [ 'search' => 'Por localidade' ]); ?>
-
                     </div>
 
                     <!-- BODY -->
-                    <div class="card-body no-border p-0 m-0">
-
-                        <div class="table-responsive table-striped table-sm table-hover m-0" style="overflow-x: visible;">
-                            <table id="tableResults" class="table table-bordered p-0 m-0" style="border-bottom: 0px solid white">
-                                <thead>
-                                    <tr class="">
-                                        <?= $this->element('th_sort', [ 'th' => ['20%', 'Cultos.Localidade.nome', __('Localidades') ] ]); ?>
-                                        <?= $this->element('th_sort', [ 'th' => ['10%', 'Cultos.dia', __('Semana') ] ]); ?>
-                                        <?= $this->element('th_sort', [ 'th' => ['5%', 'Cultos.hora', __('Hora') ] ]); ?>
-                                        <?= $this->element('th_sort', [ 'th' => ['10%', 'Cultos.tipo', __('Tipo') ] ]); ?>
-                                        <th class="text-right" width="35%"></th>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered p-0 m-0">
+                            <thead>
+                                <tr class="">
+                                    <?= $this->element('th_sort', [ 'th' => ['20%', 'Cultos.Localidade.nome', __('Localidades') ] ]); ?>
+                                    <?= $this->element('th_sort', [ 'th' => ['10%', 'Cultos.dia', __('Semana') ] ]); ?>
+                                    <?= $this->element('th_sort', [ 'th' => ['5%', 'Cultos.hora', __('Hora') ] ]); ?>
+                                    <?= $this->element('th_sort', [ 'th' => ['10%', 'Cultos.tipo', __('Tipo') ] ]); ?>
+                                    <th class="text-right" width="35%"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                                <?php foreach ($cultos as $culto): ?>
+                                    <tr class="align-middle">
+                                        <td class="text-left px-3"><?= $culto->Localidades->nome; ?></td>
+                                        <td class="text-left px-3"><?= $utils['semana_id_longo'][$culto->dia]; ?></td>
+                                        <td class="text-left px-3"><?= $aevOptions['hora'][$culto->hora]; ?></td>
+                                        <td class="text-left px-3"><?= $aevOptions['tipo'][$culto->tipo]; ?></td>
+                                        <td class="text-left px-3">
+                                            <a class="btn btn-link"  href="/Cultos/view/<?= $culto->id;?>">
+                                                <i class="fa fa-search text-primary"></i>
+                                            </a>
+                                            <a class="btn btn-link" href="/Cultos/edit/<?= $culto->id;?>"
+                                                data-confirm = "Tem certeza que deseja editar o culto?">
+                                                <i class="fa fa-pencil-alt text-success"></i>
+                                            </a>
+                                            <a class="btn btn-link" href="/Cultos/delete/<?= $culto->id;?>"
+                                                data-confirm = "Tem certeza que deseja excluir o culto?">
+                                                <i class="fas fa-trash-alt text-danger"></i>
+                                            </a>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody class="tdMiddleAlign">
-                                    <?php foreach ($cultos as $culto): ?>
-                                        <tr class="vAlignMiddle">
-                                            <td class="text-left px-3"><?= $culto->Localidades->nome; ?></td>
-                                            <td class="text-left px-3"><?= $utils['semana_id_longo'][$culto->dia]; ?></td>
-                                            <td class="text-left px-3"><?= $aevOptions['hora'][$culto->hora]; ?></td>
-                                            <td class="text-left px-3"><?= $aevOptions['tipo'][$culto->tipo]; ?></td>
-                                            <td class="text-left px-3">
-                                                <div class="dropdown d-block">
-                                                    <button class="btn btn-primary dropdown-toggle no-radius btn-sm py-0" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Opções
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right -py-2 -m-0" aria-labelledby="acoesListar">
-                                                        <a class="dropdown-item"  href="/Cultos/view/<?= $culto->id;?>">
-                                                            <i class="fa fa-search text-primary"></i>
-                                                            Visualizar
-                                                        </a>
-                                                        <a class="dropdown-item" href="/Cultos/edit/<?= $culto->id;?>"
-                                                            data-confirm = "Tem certeza que deseja editar o culto?">
-                                                            <i class="fa fa-pencil-alt text-success"></i>
-                                                            Editar
-                                                        </a>
-                                                        <a class="dropdown-item" href="/Cultos/delete/<?= $culto->id;?>"
-                                                            data-confirm = "Tem certeza que deseja excluir o culto?">
-                                                            <i class="fas fa-trash-alt text-danger"></i>
-                                                            Excluir
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
 
                     </div>
                     <!-- FOOTER -->
-                    <div class="card-footer p-0 m-0">
+                    <div class="card-footer no-radius p-0 m-0">
                         <?php echo $this->element('pager'); ?>
                     </div>
                 </div>

@@ -6,16 +6,15 @@
 <?= $this->element('breadcrumb', [ 'nav' => $nav ]); ?>
 
 <div class="container-row">
-    <div class="col-12">
+    <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
         <?= $this->Flash->render() ?>
     </div>
 </div>
 
-<div class="container-row">
-    <div class="col-12">
+<div class="container-row p-2">
+    <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
 
-        <div class="col-12 p-0 mb-2 mobile-hide">
-
+        <div class="col-12 p-0 mb-2">
             <a class="btn btn-success no-radius" href="/Reuniao/add">
                 <i class="fa fa-plus fa-sm"></i>
                 <span class="">Novo</span>
@@ -25,74 +24,57 @@
                 <i class="fa fa-filter fa-sm"></i>
                 <span class="">Filtro</span>
             </button>
-
         </div>
 
-        <div class="row mobile-hide">
+        <div class="row">
             <div class="col-12 mt-2 mb-2">
 
                 <!-- CARD -->
                 <div class="card shadow no-radius border-1">
 
                     <!-- HEADER -->
-                    <div class="card-header p-2 m-0 d-flex justify-content-between">
-
+                    <div class="card-header no-radius" style="border-bottom: 0px">
                         <?= $this->element('search', [ 'search' => 'Por código ou localidade' ]); ?>
-
                     </div>
 
                     <!-- BODY -->
-                    <div class="card-body no-border p-0 m-0">
-
-                        <div class="table-responsive table-striped table-sm table-hover m-0" style="overflow-x: visible;">
-                            <table id="tableResults" class="table table-bordered p-0 m-0" style="border-bottom: 0px solid white">
-                                <thead>
-                                    <tr class="">
-                                        <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.id', __('Código') ] ]); ?>
-                                        <?= $this->element('th_sort', [ 'th' => ['20%', 'Batismo.Localidades.nome', __('Localidades') ] ]); ?>
-                                        <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.Localidades.Municipio.id', __('Municipio') ] ]); ?>
-                                        <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.data', __('Data') ] ]); ?>
-                                        <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.hora', __('Hora') ] ]); ?>
-                                        <th class="text-right" width="40%"></th>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered p-0 m-0">
+                            <thead>
+                                <tr class="">
+                                    <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.id', __('Código') ] ]); ?>
+                                    <?= $this->element('th_sort', [ 'th' => ['20%', 'Batismo.Localidades.nome', __('Localidades') ] ]); ?>
+                                    <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.Localidades.Municipio.id', __('Municipio') ] ]); ?>
+                                    <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.data', __('Data') ] ]); ?>
+                                    <?= $this->element('th_sort', [ 'th' => ['10%', 'Batismo.hora', __('Hora') ] ]); ?>
+                                    <th class="text-right" width="40%"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                                <?php foreach ($reuniao as $local): ?>
+                                    <tr class="align-middle">
+                                        <td class="text-center"><?= h($local->id) ?></td>
+                                        <td class="text-left"><?= h($local->Localidades->nome) ?></td>
+                                        <td class="text-left"><?= h($local->Localidades->Municipios->nome); ?></td>
+                                        <td class="text-center"><?= h($local->data->format('d/m/Y')); ?></td>
+                                        <td class="text-center"><?= h($aevOptions['hora'][$local->horario_id]); ?></td>
+                                        <td class="text-left">
+                                            <a class="btn btn-link" href="/Reuniao/view/<?= $local->id;?>">
+                                                <i class="fa fa-search text-primary"></i>
+                                            </a>
+                                            <a class="btn btn-link" href="/Reuniao/edit/<?= $local->id;?>"
+                                                data-confirm = "Tem certeza que deseja editar a Reunião?">
+                                                <i class="fa fa-pencil-alt text-success"></i>
+                                            </a>
+                                            <a class="btn btn-link" href="/Reuniao/delete/<?= $local->id;?>"
+                                                data-confirm = "Tem certeza que deseja excluir a Reunião?">
+                                                <i class="fas fa-trash-alt text-danger"></i>
+                                            </a>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody class="tdMiddleAlign">
-                                    <?php foreach ($reuniao as $local): ?>
-                                        <tr class="vAlignMiddle">
-                                            <td class="text-center px-3"><?= h($local->id) ?></td>
-                                            <td class="text-left px-3"><?= h($local->Localidades->nome) ?></td>
-                                            <td class="text-left px-3"><?= h($local->Localidades->Municipios->nome); ?></td>
-                                            <td class="text-center px-3"><?= h($local->data->format('d/m/Y')); ?></td>
-                                            <td class="text-center px-3"><?= h($aevOptions['hora'][$local->horario_id]); ?></td>
-                                            <td class="text-left px-3">
-                                                <div class="dropdown d-block">
-                                                    <button class="btn btn-primary dropdown-toggle no-radius btn-sm py-0" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Opções
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right -py-2 -m-0" aria-labelledby="acoesListar">
-                                                        <a class="dropdown-item"  href="/Reuniao/view/<?= $local->id;?>">
-                                                            <i class="fa fa-search text-primary"></i>
-                                                            Visualizar
-                                                        </a>
-                                                        <a class="dropdown-item" href="/Reuniao/edit/<?= $local->id;?>"
-                                                            data-confirm = "Tem certeza que deseja editar a Reunião?">
-                                                            <i class="fa fa-pencil-alt text-success"></i>
-                                                            Editar
-                                                        </a>
-                                                        <a class="dropdown-item" href="/Reuniao/delete/<?= $local->id;?>"
-                                                            data-confirm = "Tem certeza que deseja excluir a Reunião?">
-                                                            <i class="fas fa-trash-alt text-danger"></i>
-                                                            Excluir
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                     <!-- FOOTER -->
                     <div class="card-footer p-0 m-0">

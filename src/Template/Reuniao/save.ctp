@@ -32,7 +32,7 @@ $hoje = Time::now()->format('d/m/Y');
 
         <?= $this->Form->create($reuniao, array('class' => 'form-horizontal needs-validation', 'type' => 'post', 'novalidate')) ?>
 
-        <div class="card shadow border-1 no-radius mb-4">
+        <div class="card shadow border-1 no-radius mb-4 m-1">
 
             <div class="card-header py-3">
                 <h6 class="strong p-0 m-0 text-secondary">
@@ -87,7 +87,7 @@ $hoje = Time::now()->format('d/m/Y');
                     </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-12">
                         <label for="nome" class="strong">Data:</label>
-                        <div class='input-group'>
+                        <div class='input-group input-group-sm'>
                             <?=
                             $this->Form->input('data',
                                     array(
@@ -102,11 +102,10 @@ $hoje = Time::now()->format('d/m/Y');
                                     )
                             )
                             ?>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-calendar"></i>
-                                </span>
-                            </div>
+                            <span class="input-group-text no-radius">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+
                         </div>
                     </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-12">

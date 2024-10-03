@@ -36,7 +36,7 @@ $nav = [
 
         <?= $this->Form->create($ensaio, array('class' => 'form-horizontal needs-validation', 'type' => 'post', 'novalidate')) ?>
 
-        <div class="card shadow border-1 no-radius mb-4">
+        <div class="card shadow border-1 no-radius mb-4 m-1">
 
             <div class="card-header py-3">
                 <h6 class="strong p-0 m-0 text-secondary">

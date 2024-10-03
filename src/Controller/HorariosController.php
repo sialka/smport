@@ -6,21 +6,25 @@ use Cake\Event\Event;
 use Cake\ORM\Table;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
+use Cake\View\Helper\PaginatorHelper;
 
 class HorariosController extends AppController {
-    
+
     public $paginate = [
         'limit' => 17,
         'order' => [
             'Horarios.hora' => 'asc',
+        ],
+        'templates' => [
+            'sort' => '',
         ]
     ];
 
     public function initialize() {
 
         parent::initialize();
-        $this->request->session()->write('layout', 'admin');  
-        
+        $this->request->session()->write('layout', 'admin');
+
         $this->loadComponent('Paginator');
         $this->loadComponent('Conditions', [
             'prefixSession'      => 'ccb',
@@ -43,15 +47,19 @@ class HorariosController extends AppController {
             ]
         ]);
 
+        //$result = $this->Paginator;
+        //debug($result);exit;
+
+
     }
 
     public function beforeRender(Event $event) {
         parent::beforeRender($event);
-        
+
     }
 
     public function beforeFilter(Event $event) {
-        parent::beforeFilter($event);        
+        parent::beforeFilter($event);
 
         if ($this->request->is('ajax') || (in_array('application/json', $this->request->accepts()))) {
             //$this->Security->config('unlockedActions', ['index']);
@@ -60,9 +68,9 @@ class HorariosController extends AppController {
     }
 
     public function index() {
-        
+
         $conversion = array(
-            'Horarios' => array(                
+            'Horarios' => array(
                 'localidade' => array('name' => 'localidade', 'operation' => 'LIKE', 'coalesce' => false, 'date' => false, 'alias' => __('Código'), 'ignore' => array('')),
                 'dia'        => array('name' => 'dia',        'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('Nome'), 'ignore' => array('')),
                 'hora'       => array('name' => 'hora',       'operation' => '', 'coalesce' => false, 'date' => false, 'alias' => __('Setor'), 'ignore' => array('')),
@@ -74,14 +82,14 @@ class HorariosController extends AppController {
         if (isset($this->request->data) && is_array($this->request->data) && (sizeof($this->request->data) >= 1)) {
             $this->request->data['Horarios'] = $this->request->data;
         }
-        
+
         $_conditions = $this->Conditions->filter('Horarios', $conversion, [], null, null);
 
         $horarios = $this->paginate($this->Horarios->find('all')->where($_conditions['conditions']));
-                
+
         $this->set('horarios', $horarios);
         $this->set('_conditions',   $_conditions['stringFilter']);
-        
+
     }
 
     public function add(){
@@ -90,24 +98,24 @@ class HorariosController extends AppController {
 
         if ($this->request->is('post')) {
 
-            $data = $this->request->data;            
+            $data = $this->request->data;
 
-            $new = $this->Horarios->patchEntity($horario, $data);     
+            $new = $this->Horarios->patchEntity($horario, $data);
 
             //debug([$data, $new]);exit;
 
-            if ($this->Horarios->save($new)) {                
-                
+            if ($this->Horarios->save($new)) {
+
                 $this->Flash->success(__('O horario foi adicionada com sucesso !!!'));
-                
+
                 return $this->redirect(['controller' => 'Horarios', 'action' => 'index']);
-                
+
             } else {
 
                 $error_list = "<p class='mt-2'>Não foi possivel adicionar o horario";
                 $error_list .= '<ul class="mt-3">';
                 $erros = $new->errors();
-                                
+
                 if($erros){
                     foreach($erros as $key => $value){
                         $error_list .= "<li>".implode(' ', $value) . "</li>";
@@ -115,16 +123,16 @@ class HorariosController extends AppController {
                 }
                 $error_list .= '</ul>';
                 $this->Flash->error($error_list);
-                
+
                 return $this->redirect(['controller' => 'Horario', 'action' => 'add']);
             }
-        }      
+        }
 
         $this->set('horario', $horario);
         $this->set('mode', 'add');
         $this->render('save');
     }
-    
+
     public function edit($id = null){
         $horario = $this->Horarios->get($id);
 
@@ -146,7 +154,7 @@ class HorariosController extends AppController {
                 }
             }
         }
-        
+
         $this->set('horario', $horario);
         $this->set('mode', 'edit');
         $this->render('save');
@@ -154,12 +162,12 @@ class HorariosController extends AppController {
 
     public function view($id = null){
         $horario = $this->Horarios->get($id);
-        
+
         $this->set('horario', $horario);
         $this->set('mode', 'view');
         $this->render('save');
     }
-    
+
 
     public function delete($id = null){
 
@@ -177,6 +185,6 @@ class HorariosController extends AppController {
         }
 
         return $this->redirect(['controller' => 'Horarios', 'action' => 'index']);
-    }    
-    
+    }
+
 }

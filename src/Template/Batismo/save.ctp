@@ -85,9 +85,9 @@ $hoje = Time::now()->format('d/m/Y');
 
                         ?>
                     </div>
-                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                    <div class="-form-group col-lg-6 col-md-6 col-sm-12">
                         <label for="nome" class="strong">Data:</label>
-                        <div class='input-group'>
+                        <div class='input-group input-group-sm'>
                             <?=
                             $this->Form->input('data',
                                     array(
@@ -102,11 +102,9 @@ $hoje = Time::now()->format('d/m/Y');
                                     )
                             )
                             ?>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-calendar"></i>
-                                </span>
-                            </div>
+                            <span class="input-group-text no-radius">
+                                <i class="fa fa-calendar"></i>
+                            </span>
                         </div>
                     </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-12">

@@ -11271,3 +11271,8 @@ body {
 .no-list{
   list-style-type: none
 }
+
+.disabled {
+  background-color: #EEEEEE;
+  color: #afafaf
+}

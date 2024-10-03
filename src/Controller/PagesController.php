@@ -41,10 +41,8 @@ class PagesController extends AppController
     public function display(...$path)
     {
 
-        debug('display');
-
         return $this->redirect(['controller' => 'Dashboard', 'action' => 'index']);
-        
+
         if (isset($this->userLoged) && ($this->userLoged !== false)) {
             return $this->redirect(['controller' => 'Users', 'action' => 'home']);
         }
@@ -78,8 +76,6 @@ class PagesController extends AppController
 
     public function index(){
 
-        debug('index');
-        
         if (isset($this->userLoged) && ($this->userLoged !== false)) {
             return $this->redirect(['controller' => 'Users', 'action' => 'home']);
         }

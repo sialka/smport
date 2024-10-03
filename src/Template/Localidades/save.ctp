@@ -2,7 +2,7 @@
 switch ($mode) {
     case 'add':
         $page = 'Novo';
-        $title = 'Nova Localidade';
+        $title = 'Localidade';
         break;
     case 'edit':
         $page = 'Editar';
@@ -19,12 +19,6 @@ $nav = [
     'Adicionar' => '',
 ];
 
-//$session = $this->request->session()->read('localidade');
-
-//if($session != null){
-//  $localidade = $session;
-//}
-
 ?>
 
 <?= $this->element('breadcrumb', ['nav' => $nav]); ?>
@@ -34,11 +28,11 @@ $nav = [
 
         <?= $this->Form->create($localidade, array('class' => 'form-horizontal needs-validation', 'type' => 'post', 'novalidate')) ?>
 
-        <div class="card shadow border-1 no-radius mb-4">
+        <div class="card shadow border-1 no-radius mb-4 m-1">
 
             <div class="card-header py-3">
                 <h6 class="strong p-0 m-0 text-dark">
-                    <i class="fas fa-map-marker-alt"></i>
+                    <i class="fa-solid fa-place-of-worship"></i>
                     <?= $title ?>
                 </h6>
             </div>
@@ -95,7 +89,7 @@ $nav = [
                         <?=
                         $this->Form->input('municipio_id',
                                 array(
-                                    'class' => 'form-control text-center no-radius',
+                                    'class' => 'form-control text-center no-radius text-uppercase',
                                     'id' => 'municipio_id',
                                     'placeholder' => __(''),
                                     'type' => 'select',
@@ -112,7 +106,7 @@ $nav = [
                         <?=
                         $this->Form->input('anciaes',
                                 array(
-                                    'class'       => 'form-control no-radius',
+                                    'class'       => 'form-control no-radius text-uppercase',
                                     'id'          => 'anciaes',
                                     'placeholder' => '',
                                     'type'        => 'select',

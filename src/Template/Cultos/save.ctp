@@ -2,11 +2,11 @@
 switch ($mode) {
     case 'add':
         $page = 'Novo';
-        $title = 'Nova Localidade';
+        $title = 'Culto';
         break;
     case 'edit':
         $page = 'Editar';
-        $title = 'Alterar Localidade';
+        $title = 'Alterar Culto';
         break;
     case 'view':
         $page = 'Dados';
@@ -34,11 +34,11 @@ if($session != null){
 
         <?= $this->Form->create($culto, array('class' => 'form-horizontal needs-validation', 'type' => 'post', 'novalidate')) ?>
 
-        <div class="card shadow border-1 no-radius mb-4">
+        <div class="card shadow border-1 no-radius mb-4 m-1">
 
             <div class="card-header py-3">
                 <h6 class="strong p-0 m-0 text-secondary">
-                    <i class="fas fa-map-marker-alt"></i>
+                    <i class="fa-regular fa-calendar-plus"></i>
                     <?= $title ?>
                 </h6>
             </div>

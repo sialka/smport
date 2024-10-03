@@ -51,23 +51,33 @@
 
 <div class="col-xxl-4 offset-xxl-4 col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-sm-12 col-xs-12 bc" style="height: 100vh">
 
-  <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+  <nav class='navbar navbar-light bg-dark p-0' -class="sb-topnav navbar navbar-expand navbar-dark bg-dark col-12">
       <!-- Navbar Brand-->
-      <div class="d-flex justify-content-between col-12">
-        <a class="navbar-brand ps-3 text-white" id="admin" href="#">
-          <i class="fa-regular fa-calendar-check"></i>
-          Agenda
-        </a>
-        <div class="">
-          <button class="btn btn-block no-radius text-white text-uppercase" data-bs-toggle="modal" data-bs-target="#modalCidade">
-            <?= $btn_local_title; ?>
-            <i class="fa-solid fa-location-dot"></i>
+      <div class="container-fluid">
+
+        <div class='col-4 text-left'>
+          <a class="btn btn-block no-radius text-white" id="admin" href="#">
+            <i class="fa-regular fa-calendar-check fa-xl"></i>
+          </a>
+        </div>
+
+        <div class='col-4 text-center'>
+          <div class="align-self-center">
+            <div style='font-size: 1.2em' class='text-white'>Agenda</div>
+            <div style='font-size: 0.7em' class='text-white text-uppercase'><?= $btn_local_title; ?></div>
+          </div>
+        </div>
+
+        <div class='col-4 text-end'>
+          <button class="btn btn-block no-radius text-white text-uppercase -bg-danger" data-bs-toggle="modal" data-bs-target="#modalCidade">
+            <i class="fa-solid fa-location-dot fa-xl"></i>
           </button>
         </div>
+
       </div>
   </nav>
 
-  <main -class='bc' -style="heigth: 100%">
+  <main>
     <div class="accordion no-radius p-3" id="accordionExample">
 
       <!-- CULTOS -->
@@ -80,13 +90,21 @@
           <ul class="list-group no-radius">
             <?php foreach($semana as $key => $dia): ?>
 
-              <?php $class = $semana_us_br[$data_week['weekday']] == $dia ? "text-dark" : "text-secondary";?>
-              <?php $icon = $semana_us_br[$data_week['weekday']] == $dia ? "<i class='fa-solid fa-check text-success'></i>" : "";?>
+              <?php
+                $class = $semana_us_br[$data_week['weekday']] == $dia ? "text-dark" : "text-secondary";
+                $icon1 = $semana_us_br[$data_week['weekday']] == $dia ? '<i class="fa-solid fa-angles-left"></i>' : "";
+                $icon2 = $semana_us_br[$data_week['weekday']] == $dia ? '<i class="fa-solid fa-angles-right"></i>' : "";
+                $corF  = $semana_us_br[$data_week['weekday']] == $dia ? "bg-success" : "bg-secondary";
+                $corT  = $semana_us_br[$data_week['weekday']] == $dia ? "text-success" : "text-secondary";
 
-              <li class='list-group-item no-radius text-left text-dark bg-light mb-1'>
+                $dia_calendario = strlen($dias_da_semana[$key]) == 1 ? '0'.$dias_da_semana[$key] : $dias_da_semana[$key];
+              ?>
+
+              <li class='list-group-item no-radius text-left text-dark bg-light mb-1 px-2'>
                 <a class="btn btn-block no-radius p-0 m-0 text-left <?= $class; ?>" data-bs-toggle="collapse" href="#<?= $dia ?>" role="button" aria-expanded="false" aria-controls="<?= $dia ?>">
-                  <strong><?= "<span class='badge rounded-pill bg-secondary'>{$dias_da_semana[$key]}</span> {$dia}" ?></strong>
-                  <?= $icon; ?>
+                  <strong>
+                    <?= "<span style='border-radius: 50%; font-size: 0.8rem' class='text-light {$corF} p-1 m-0'>{$dia_calendario}</span><span class='{$corT}'> {$dia}</span>"; ?>
+                  </strong>
                 </a>
               </li>
 

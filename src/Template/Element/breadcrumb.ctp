@@ -2,7 +2,7 @@
 <ol class="breadcrumb p-2 m-0">
     <li class="breadcrumb-item">
         <i class="fa fa-home"></i>
-        <a href="/Admin/index">
+        <a class="text-dark no-decoration" href="/Admin/index">
             Admin
         </a>
     </li>
@@ -11,13 +11,13 @@
         <?php foreach($nav as $text => $link ) { ?>
 
                 <?php if(!empty($link)) { ?>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        <a href="<?= $link ?>"><?= $text ?></a>
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a class="text-dark no-decoration" href="<?= $link ?>"><?= $text ?></a>
                     </li>
                 <?php } else { ?>
-                    <li class="breadcrumb-item" aria-current="page">
+                    <li class="breadcrumb-item text-secondary" aria-current="page">
                         <?= $text ?>
-                        </li>
+                    </li>
                 <?php } ?>
 
         <?php } ?>

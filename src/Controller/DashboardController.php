@@ -70,6 +70,8 @@ class DashboardController extends AppController
         # --- Ordenação --- #
         $ordenacoes = $this->ordenacao($municipio_id, $horarios);
 
+        //debug($semana);//exit;
+
         $this->set('municipios', $municipios);
         $this->set('btn_local_title', $btn_local_title);
         $this->set('semana', $semana);
@@ -363,6 +365,50 @@ class DashboardController extends AppController
             }
         }
 
+        // Corrigindo 1o. semana com inicio depois do DOM
+        if (count($schema[1]) != 7) {
+
+            $ult_dia_mes = [
+                1 => '31',
+                2 => '29',
+                3 => '31',
+                4 => '30',
+                5 => '31',
+                6 => '30',
+                7 => '31',
+                8 => '31',
+                9 => '30',
+                10 => '31',
+                11 => '30',
+                12 => '31',
+            ];
+
+            $mes_anterior  = intval(Time::now()->format('m')) - 1;
+            $preenchido    = 7 - count($schema[1]); // 2
+            $schema_ajuste = [];
+            $indice        = 0;
+
+            // Corrigir apenas qdo houve diverença
+            if($preenchido != 7){
+
+                // Preenchendo a 1a. Semana
+                $acerto = ($preenchido-1);
+                for ($i=0; $i<=6; $i++){
+
+                    if($acerto != -1){
+                        $schema_ajuste += [$i => $ult_dia_mes[$mes_anterior] - $acerto];
+                        $acerto--;
+                    }else{
+                        $schema_ajuste += [$i => $schema[1][$indice]];
+                        $indice++;
+                    }
+                }
+
+            }
+
+        }
+
+        $schema[1] = $schema_ajuste;
         $this->set('schema', $schema);
         return ['semana'=>$semana, 'schema'=>$schema];
     }
